@@ -1,8 +1,10 @@
-const app = require("express")();
+const express = require('express');
+
 const bodyParser = require('body-parser');
 const path = require('path');
 
 require('dotenv').config();
+const app = express();
 
 const db = require('./db');
 
@@ -13,10 +15,10 @@ const authRoutes = require('./routes/auth');
 
 app.use("/auth", authRoutes);
 
-// app.use(express.static(path.join(__dirname + '/front_end/build')));
-// app.use('/*', (req, res) => {
-//     res.sendFile(path.join(__dirname + '/front_end/build/index.html'));
-// });
+app.use(express.static(path.join(__dirname + '/front_end/build')));
+app.use('/*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/front_end/build/index.html'));
+});
 
 const PORT = 5000;
 app.listen(PORT, () => {
