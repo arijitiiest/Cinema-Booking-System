@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const db = require("../db");
-const { use } = require("../routes/auth");
 
 process.env.SECRET_KEY = "Arijit_very_secure";
 
@@ -19,16 +18,19 @@ exports.postLogin = async (req, res, next) => {
       email,
     ]);
 
-    if (user.rowCount == 0) throw new Error("Email doesnot exist");
+    if (user.rowCount == 0) {
+      res.status(404).json({status: 404, message: "Email doesnot exist"})
+    }
 
     if (bcrypt.compareSync(password, user.rows[0].password)) {
       const token = jwt.sign(user.rows[0].user_id, process.env.SECRET_KEY);
-      res.send(token);
+      res.status(200).json({status: 200, token: token, message: "Login successful"})
     } else {
-      throw new Error("Password incorrect");
+      res.status(401).json({status: 401, message: "Password incorrect"})
     }
   } catch (err) {
     console.log(err);
+    res.status(500).json({status: 500, message: "Some error occurred"});
   }
 };
 
@@ -43,8 +45,9 @@ exports.postRegister = async (req, res, next) => {
       email,
     ]);
 
-    if (user.rowCount != 0) throw new Error("Email already exist");
-
+    if (user.rowCount != 0) {
+      res.status(409).json({ status: 409, message: "email already exist" });
+    }
     const hash = await bcrypt.hash(password, 10);
 
     const create = await db.query(
@@ -52,12 +55,11 @@ exports.postRegister = async (req, res, next) => {
       [first_name, last_name, email, hash]
     );
 
-    res.send('Created user');
+    res.status(201).json({ status: 201, message: "user created" });
   } catch (err) {
     console.log(err);
+    res.status(500).json({ status: 500,message: "Some error occurred" });
   }
 };
 
-exports.postLogout = (req, res, next) => {
-  
-};
+exports.postLogout = (req, res, next) => {};
