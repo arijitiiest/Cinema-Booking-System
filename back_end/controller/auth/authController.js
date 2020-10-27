@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../../models/user");
+const Admin = require("../../models/admin");
 
 process.env.SECRET_KEY = "Arijit_very_secure";
 
@@ -70,65 +71,69 @@ exports.postRegister = async (req, res, next) => {
   }
 };
 
-// const db = require("../db");
+exports.postAdminLogin = async (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
-// process.env.SECRET_KEY = "Arijit_very_secure";
+  console.log(username, password);
 
-// exports.getLogin = (req, res, next) => {};
+  try {
+    const user = await Admin.findOne({ where: { username } });
 
-// exports.getRegister = (req, res, next) => {};
+    console.log(user);
 
-// exports.postLogin = async (req, res, next) => {
-//   const email = req.body.email;
-//   const password = req.body.password;
+    if (!user) {
+      const err = new Error("Admin doesnot exist");
+      err.status = 404;
+      throw err;
+    }
 
-//   try {
-//     const user = await db.query("SELECT * FROM public.user WHERE email = $1", [
-//       email,
-//     ]);
+    if (bcrypt.compareSync(password, user.dataValues.password)) {
+      const token = jwt.sign(user.dataValues.admin_id, process.env.SECRET_KEY);
+      res
+        .status(200)
+        .json({ status: 200, token: token, message: "Login successful" });
+    } else {
+      const err = new Error("Password incorrect");
+      err.status = 401;
+      throw err;
+    }
+  } catch (err) {
+    // console.log(err);
+    res.status(err.status).json({ status: err.status, message: err.message });
+  }
+};
 
-//     if (user.rowCount == 0) {
-//       res.status(404).json({status: 404, message: "Email doesnot exist"})
-//     }
+exports.postAdminRegister = async (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
-//     if (bcrypt.compareSync(password, user.rows[0].password)) {
-//       const token = jwt.sign(user.rows[0].user_id, process.env.SECRET_KEY);
-//       res.status(200).json({status: 200, token: token, message: "Login successful"})
-//     } else {
-//       res.status(401).json({status: 401, message: "Password incorrect"})
-//     }
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({status: 500, message: "Some error occurred"});
-//   }
-// };
+  console.log(username, password);
 
-// exports.postRegister = async (req, res, next) => {
-//   const first_name = req.body.first_name;
-//   const last_name = req.body.last_name;
-//   const email = req.body.email;
-//   const password = req.body.password;
+  try {
+    const user = await Admin.findOne({ where: { username } });
 
-//   try {
-//     const user = await db.query("SELECT * FROM public.user WHERE email = $1", [
-//       email,
-//     ]);
+    if (user) {
+      const err = new Error("Username already exist");
+      err.status = 409;
+      throw err;
+    }
 
-//     if (user.rowCount != 0) {
-//       res.status(409).json({ status: 409, message: "email already exist" });
-//     }
-//     const hash = await bcrypt.hash(password, 10);
+    const hash = await bcrypt.hash(password, 10);
+    const create = await Admin.create({
+      username,
+      password: hash,
+    });
 
-//     const create = await db.query(
-//       "INSERT INTO public.user(first_name, last_name, email, password) VALUES ($1, $2, $3, $4)",
-//       [first_name, last_name, email, hash]
-//     );
+    if (!create) {
+      const err = new Error("Something went wrong");
+      err.status = 500;
+      throw err;
+    }
 
-//     res.status(201).json({ status: 201, message: "user created" });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ status: 500,message: "Some error occurred" });
-//   }
-// };
-
-// exports.postLogout = (req, res, next) => {};
+    res.status(201).json({ status: 201, message: "Admin created" });
+  } catch (err) {
+    // console.log(err);
+    res.status(err.status).json({ status: err.status, message: err.message });
+  }
+};

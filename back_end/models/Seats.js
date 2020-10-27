@@ -2,17 +2,17 @@ const Sequelize = require("sequelize");
 
 const sequelize = require("../db");
 
-const Shows = sequelize.define("shows", {
-  show_id: {
+const Seats = sequelize.define("seats", {
+  seat_id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
-  showtime: Sequelize.STRING(30),
+  row_no: Sequelize.STRING(10),
+  col_no: Sequelize.INTEGER,
   screen: Sequelize.STRING(10),
-  date: Sequelize.DATEONLY,
-  language: Sequelize.STRING
+  price: Sequelize.INTEGER,
 });
 
-module.exports = Shows;
+module.exports = Seats;

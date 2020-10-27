@@ -49,7 +49,7 @@ exports.postMovie = async (req, res, next) => {
 };
 
 exports.getReviews = (req, res, next) => {
-  const movie_id = req.body.movie_id;
+  const movie_id = req.query.movie_id;
 
   Movies.findByPk(movie_id)
     .then((movie) => {
@@ -95,8 +95,8 @@ exports.postReview = (req, res, next) => {
 };
 
 exports.getShows = async (req, res, next) => {
-  const movie_id = req.body.movie_id;
-  const language = req.body.language;
+  const movie_id = req.query.movie_id;
+  const language = req.query.language;
 
   Movies.findByPk(movie_id)
     .then((movie) => {
@@ -118,7 +118,7 @@ exports.getShows = async (req, res, next) => {
 
 exports.postShow = async (req, res, next) => {
   const movie_id = req.body.movie_id;
-  const time = req.body.time;
+  const showtime = req.body.showtime;
   const screen = req.body.screen;
   const date = req.body.date;
   const language = req.body.language;
@@ -129,7 +129,7 @@ exports.postShow = async (req, res, next) => {
     .then((movie) => {
       if (!movie) throw new Error("No movie");
       return movie
-        .createShow({ time, screen, date, language })
+        .createShow({ showtime, screen, date, language })
         .then((show) => {
           res.status(201).json({ status: 201, ...show.dataValues });
         })

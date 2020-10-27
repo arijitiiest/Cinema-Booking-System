@@ -12,6 +12,8 @@ const User = require("./models/user");
 const Movies = require("./models/movies");
 const Reviews = require("./models/reviews");
 const Shows = require("./models/shows");
+const Seats = require("./models/Seats");
+const SeatStatus = require("./models/SeatStatus");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,7 +24,7 @@ const apiRoutes = require("./routes/api");
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
 
-app.use("/media", express.static(__dirname + '/media'));
+app.use("/media", express.static(__dirname + "/media"));
 app.use(express.static(path.join(__dirname + "/../front_end/build")));
 app.use("/*", (req, res) => {
   res.sendFile(path.join(__dirname + "/../front_end/build/index.html"));
@@ -34,8 +36,12 @@ Movies.hasMany(Reviews);
 Shows.belongsTo(Movies, { constraints: true, onDelete: "CASCADE" });
 Movies.hasMany(Shows);
 
+SeatStatus.belongsTo(Seats, { constraints: true, onDelete: "CASCADE" });
+Seats.hasMany(SeatStatus);
+
 sequelize
   .sync({ force: true })
+  // .sync()
   .then((result) => {
     const PORT = 5000;
     app.listen(PORT, () => {
