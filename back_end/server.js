@@ -1,5 +1,5 @@
 const express = require("express");
-
+var cors = require('cors')
 const bodyParser = require("body-parser");
 const path = require("path");
 
@@ -17,6 +17,7 @@ const SeatStatus = require("./models/SeatStatus");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors())
 
 const authRoutes = require("./routes/auth");
 const apiRoutes = require("./routes/api");
@@ -40,8 +41,8 @@ SeatStatus.belongsTo(Seats, { constraints: true, onDelete: "CASCADE" });
 Seats.hasMany(SeatStatus);
 
 sequelize
-  .sync({ force: true })
-  // .sync()
+  // .sync({ force: true })
+  .sync()
   .then((result) => {
     const PORT = 5000;
     app.listen(PORT, () => {

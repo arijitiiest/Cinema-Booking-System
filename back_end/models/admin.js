@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
 const Admin = sequelize.define("admin", {
-  admin_id: {
+  id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,

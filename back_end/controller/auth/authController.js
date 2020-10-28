@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../../models/user");
 const Admin = require("../../models/admin");
 
-process.env.SECRET_KEY = "Arijit_very_secure";
-
 exports.postLogin = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -75,12 +73,10 @@ exports.postAdminLogin = async (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  console.log(username, password);
-
   try {
     const user = await Admin.findOne({ where: { username } });
 
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       const err = new Error("Admin doesnot exist");
@@ -89,17 +85,16 @@ exports.postAdminLogin = async (req, res, next) => {
     }
 
     if (bcrypt.compareSync(password, user.dataValues.password)) {
-      const token = jwt.sign(user.dataValues.admin_id, process.env.SECRET_KEY);
-      res
-        .status(200)
-        .json({ status: 200, token: token, message: "Login successful" });
+      const token = jwt.sign(user.dataValues.id, process.env.SECRET_KEY);
+      // console.log(token);
+      res.status(200).json({ token: token, username });
     } else {
       const err = new Error("Password incorrect");
       err.status = 401;
       throw err;
     }
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     res.status(err.status).json({ status: err.status, message: err.message });
   }
 };

@@ -6,24 +6,36 @@ exports.getSeats = (req, res, next) => {
   const date = req.query.date;
   const showtime = req.query.showtime;
 
-  Seats.findAll({
-    where: { screen },
-    include: [
-      {
-        model: SeatStatus,
-        where: { date, showtime },
-        required: false,
-      },
-    ],
-  })
-    .then((seats) => {
-      if (!seats) throw new Error("No seats");
-      res.status(200).json(seats);
+  if (!screen && !date && !showtime) {
+    Seats.findAll()
+      .then((seats) => {
+        if (!seats) throw new Error("No seats");
+        res.status(200).json(seats);
+      })
+      .catch((err) => {
+        // console.log(err);
+        res.status(401).json({ status: 401, message: "Somethong went wrong" });
+      });
+  } else {
+    Seats.findAll({
+      where: { screen },
+      include: [
+        {
+          model: SeatStatus,
+          where: { date, showtime },
+          required: false,
+        },
+      ],
     })
-    .catch((err) => {
-      // console.log(err);
-      res.status(401).json({ status: 401, message: "Somethong went wrong" });
-    });
+      .then((seats) => {
+        if (!seats) throw new Error("No seats");
+        res.status(200).json(seats);
+      })
+      .catch((err) => {
+        // console.log(err);
+        res.status(401).json({ status: 401, message: "Somethong went wrong" });
+      });
+  }
 };
 
 exports.postSeat = (req, res, next) => {
@@ -36,6 +48,18 @@ exports.postSeat = (req, res, next) => {
     .then((create) => {
       if (!create) throw new Error("Not created");
       res.status(201).json({ status: 201, message: "Seat created" });
+    })
+    .catch((err) => {
+      // console.log(err);
+      res.status(401).json({ status: 401, message: "Somethong went wrong" });
+    });
+};
+
+exports.deleteSeat = (req, res, next) => {
+  const seatId = req.params.id;
+  Seats.destroy({ where: { id: seatId } })
+    .then((r) => {
+      res.status(202).json({ status: 201, message: "Show deleted" });
     })
     .catch((err) => {
       // console.log(err);

@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
 const SeatStatus = sequelize.define("seatstatus", {
-  seat_status_id: {
+  id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
