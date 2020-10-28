@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const sequelize = require("../db");
 
 const Movies = sequelize.define("movies", {
-  movie_id: {
+  id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,

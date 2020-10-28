@@ -1,4 +1,5 @@
 const Movies = require("../../models/movies");
+const Shows = require("../../models/shows");
 
 exports.getMovies = (req, res, next) => {
   Movies.findAll()
@@ -6,7 +7,7 @@ exports.getMovies = (req, res, next) => {
       res.status(200).json(movies);
     })
     .catch((err) => {
-    // console.log(err);
+      // console.log(err);
       res.status(401).json({ status: 401, message: "Somethong went wrong" });
     });
 };
@@ -34,7 +35,7 @@ exports.postMovie = async (req, res, next) => {
       format,
       languages,
       age_level,
-      image_url
+      image_url,
     });
 
     if (!create) {
@@ -46,6 +47,18 @@ exports.postMovie = async (req, res, next) => {
     // console.log(err);
     res.status(401).json({ status: 401, message: "Somethong went wrong" });
   }
+};
+
+exports.deleteMovie = (req, res, next) => {
+  const id = req.params.id;
+  Movies.destroy({ where: { id } })
+    .then((r) => {
+      res.status(202).json({ status: 201, message: "Movie deleted" });
+    })
+    .catch((err) => {
+      // console.log(err);
+      res.status(401).json({ status: 401, message: "Somethong went wrong" });
+    });
 };
 
 exports.getReviews = (req, res, next) => {
@@ -94,26 +107,41 @@ exports.postReview = (req, res, next) => {
     });
 };
 
+// exports.deleteReviews = (req, res, next) => {
+//   console.log(req);
+//   res.status(401).json({ status: 401, message: "Somethong went wrong" });
+// };
+
 exports.getShows = async (req, res, next) => {
   const movie_id = req.query.movie_id;
   const language = req.query.language;
 
-  Movies.findByPk(movie_id)
-    .then((movie) => {
-      if (!movie) throw new Error("No movie");
-      return movie
-        .getShows({ where: { language } })
-        .then((shows) => {
-          res.status(200).json(shows);
-        })
-        .catch((err) => {
-          throw err;
-        });
-    })
-    .catch((err) => {
-      // console.log(err);
-      res.status(401).json({ status: 401, message: "Somethong went wrong" });
-    });
+  if (!movie_id && !language) {
+    Shows.findAll({ include: Movies })
+      .then((shows) => {
+        res.status(200).json(shows);
+      })
+      .catch((err) => {
+        res.status(401).json({ message: "something went wrong" });
+      });
+  } else {
+    Movies.findByPk(movie_id)
+      .then((movie) => {
+        if (!movie) throw new Error("No movie");
+        return movie
+          .getShows({ where: { language } })
+          .then((shows) => {
+            res.status(200).json(shows);
+          })
+          .catch((err) => {
+            throw err;
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(401).json({ status: 401, message: "Somethong went wrong" });
+      });
+  }
 };
 
 exports.postShow = async (req, res, next) => {
@@ -122,8 +150,6 @@ exports.postShow = async (req, res, next) => {
   const screen = req.body.screen;
   const date = req.body.date;
   const language = req.body.language;
-
-  console.log(date);
 
   Movies.findByPk(movie_id)
     .then((movie) => {
@@ -136,6 +162,18 @@ exports.postShow = async (req, res, next) => {
         .catch((err) => {
           throw err;
         });
+    })
+    .catch((err) => {
+      // console.log(err);
+      res.status(401).json({ status: 401, message: "Somethong went wrong" });
+    });
+};
+
+exports.deleteShow = async (req, res, next) => {
+  const showId = req.params.id;
+  Shows.destroy({ where: { id: showId } })
+    .then((r) => {
+      res.status(202).json({ status: 201, message: "Show deleted" });
     })
     .catch((err) => {
       // console.log(err);
