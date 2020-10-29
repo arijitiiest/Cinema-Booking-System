@@ -1,12 +1,13 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import './Movie.css'
 
 const Movie = ({ movie }) => {
     return (
         <Card className='my-3 p-3 rounded'>
             <Link to={`/movie/${movie.id}`}>
-                <Card.Img src={movie.image_url} variant='top' />
+                <Card.Img src={movie.image_url} variant='top' fluid />
             </Link>
 
             <Card.Body>
