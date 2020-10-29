@@ -1,5 +1,19 @@
+const sequelize = require("../../db");
 const Movies = require("../../models/movies");
+const Reviews = require("../../models/reviews");
 const Shows = require("../../models/shows");
+
+exports.getMovie = (req, res, next) => {
+  const movie_id = req.params.id;
+  Movies.findByPk(movie_id)
+    .then((movie) => {
+      res.status(200).json(movie);
+    })
+    .catch((err) => {
+      // console.log(err);
+      res.status(401).json({ status: 401, message: "Somethong went wrong" });
+    });
+};
 
 exports.getMovies = (req, res, next) => {
   Movies.findAll()
@@ -57,6 +71,26 @@ exports.deleteMovie = (req, res, next) => {
     })
     .catch((err) => {
       // console.log(err);
+      res.status(401).json({ status: 401, message: "Somethong went wrong" });
+    });
+};
+
+exports.getReviewData = (req, res, next) => {
+  const movie_id = req.query.movie_id;
+
+  Reviews.findAll({
+    where: { movieId: movie_id },
+    attributes: [
+      [sequelize.fn("AVG", sequelize.col("rating")), "avg_rating"],
+      [sequelize.fn("COUNT", sequelize.col("rating")), "count_rating"],
+    ],
+  })
+    .then((reviews) => {
+      // console.log(reviews);
+      res.status(200).json(reviews);
+    })
+    .catch((err) => {
+      console.log(err);
       res.status(401).json({ status: 401, message: "Somethong went wrong" });
     });
 };
