@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 const Nav = () => {
     return (
         <div>
-            <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+            <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
             
               <LinkContainer to='/'>
                 <Navbar.Brand>Cholochitro Bhobon</Navbar.Brand>
