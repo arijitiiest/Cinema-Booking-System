@@ -3,13 +3,21 @@ import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './Movie.css'
+import axios from 'axios'
 import Rating from '../Rating/Rating'
 
 
 const Movie = ({ movie }) => {
 
-    // eslint-disable-next-line
-    const [rating, setRating] = useState([{"avg_rating":"4","count_rating":"10"}]);
+    const [rating, setRating] = useState([{}]);
+    useEffect(() => {
+        const fetchRating = async () => {
+            const { data } = await axios.get(`/api/review-data?movie_id=${movie.id}`);
+            setRating(data);
+        }
+
+        fetchRating()
+    }, [movie.id]) 
     const {avg_rating, count_rating} = rating[0]
     const count = parseInt(count_rating)
     return (

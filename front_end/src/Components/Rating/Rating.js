@@ -6,7 +6,7 @@ const Rating = ({ avg_rating, count }) => {
     if(count === 0){
         return(
             <div className='rating'>
-                <span>Yet to be reviewed</span>
+                <span>Yet to be rated</span>
             </div>
         )
     }else{
