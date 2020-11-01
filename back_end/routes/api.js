@@ -16,6 +16,8 @@ router.post("/movies", isAdminMiddleware, movieController.postMovie);
 
 router.delete("/movies/:id", isAdminMiddleware, movieController.deleteMovie);
 
+router.get("/show/:id", rangeMiddleware, movieController.getShow);
+
 router.get("/shows", rangeMiddleware, movieController.getShows);
 
 router.post("/shows", isAdminMiddleware, movieController.postShow);

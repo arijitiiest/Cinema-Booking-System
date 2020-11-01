@@ -178,6 +178,19 @@ exports.getShows = async (req, res, next) => {
   }
 };
 
+exports.getShow = async (req, res, next) => {
+  const showId = req.params.id;
+  Shows.findByPk(showId)
+    .then((show) => {
+      if (!show) throw new Error("Show not found");
+      res.status(200).json(show);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(401).json({ message: "Something went wrong" });
+    });
+};
+
 exports.postShow = async (req, res, next) => {
   const movie_id = req.body.movie_id;
   const showtime = req.body.showtime;
