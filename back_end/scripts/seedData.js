@@ -5,6 +5,17 @@ const Admin = require("../models/admin");
 const Movies = require("../models/movies");
 const Shows = require("../models/shows");
 const Seats = require("../models/Seats");
+const Reviews = require("../models/reviews");
+const SeatStatus = require("../models/SeatStatus");
+
+Reviews.belongsTo(Movies, { constraints: true, onDelete: "CASCADE" });
+Movies.hasMany(Reviews);
+
+Shows.belongsTo(Movies, { constraints: true, onDelete: "CASCADE" });
+Movies.hasMany(Shows);
+
+SeatStatus.belongsTo(Seats, { constraints: true, onDelete: "CASCADE" });
+Seats.hasMany(SeatStatus);
 
 sequelize
   .sync()
@@ -239,20 +250,29 @@ sequelize
         languages: ["English", "Hindi"],
         age_level: 12,
         image_url: "/media/sonarkella.jpg",
-      }
+      },
     ])
   )
   .then(async () => {
     console.log("Movies seeded");
   })
-  //   .then(() => Shows.sync({ force: true }))
-  //   .then(async () => {
-  //     console.log("Shows synced");
-  //   })
-  //   .then(() => Shows.bulkCreate([{}]))
-  //   .then(async () => {
-  //     console.log("Shows seeded");
-  //   })
+  .then(() => Shows.sync({force: true}))
+  .then(async () => {
+    console.log("Shows synced");
+  })
+  .then(
+    () =>
+    Shows.bulkCreate([{
+      movieId: 1,
+      showtime: "9.00 pm",
+      screen: "A",
+      date: "2020-10-28",
+      language: "English",
+    }])
+  )
+  .then(async () => {
+    console.log("Shows seeded");
+  })
   //   .then(() => Seats.sync({ force: true }))
   //   .then(async () => {
   //     console.log("Seats synced");
@@ -261,4 +281,7 @@ sequelize
   //   .then(async () => {
   //     console.log("Seats seeded");
   //   })
+  .then(() => {
+    console.log("OK");
+  })
   .catch((err) => console.log(err));
