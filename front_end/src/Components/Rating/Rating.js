@@ -31,8 +31,11 @@ const Rating = ({ id }) => {
             </>
         )
     } else{
-        const count = parseInt(rating[0].count_rating)
-        const avg_rating = rating[0].avg_rating
+        const count = rating[id] ? parseInt(rating[id].count_rating) : 0
+        const avg_rating = rating[id] ? rating[id].avg_rating : 0
+        // const count = 5
+        // const avg_rating = 4
+        // console.log(rating[id])
         if(count === 0){
             return(
                 <div className='rating'>
