@@ -1,45 +1,68 @@
 // eslint-disable-next-line
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
 import './Movie.css'
-import axios from 'axios'
+
+import Loader from '../Loader/Loader'
+import Message from '../Message/Message'
 import Rating from '../Rating/Rating'
+import { ratingDetails } from '../../actions/ratingDetailsAction'
 
 
 const Movie = ({ movie }) => {
 
-    const [rating, setRating] = useState([{}]);
+    const dispatch = useDispatch()
+    const id = movie.id
     useEffect(() => {
-        const fetchRating = async () => {
-            const { data } = await axios.get(`/api/review-data?movie_id=${movie.id}`);
-            setRating(data);
-        }
+        dispatch(ratingDetails(id))
+    }, [dispatch, id]) 
 
-        fetchRating()
-    }, [movie.id]) 
-    const {avg_rating, count_rating} = rating[0]
-    const count = parseInt(count_rating)
-    return (
-        <Card className='my-3 p-3 rounded'>
-            <Link to={`/movie/${movie.id}`}>
-                <Card.Img src={movie.image_url} variant='top'/>
-            </Link>
+    const detailRating = useSelector(state => state.detailRating)
+    const { loading, rating, error} = detailRating
 
-            <Card.Body>
-                <Link to={`/movie/${movie.id}`}>
-                    <Card.Title as='div'>
-                        <h4> {movie.title} </h4>
-                    </Card.Title>
-                </Link>
-
-                <Card.Text as='div'>
-                    <Rating avg_rating={avg_rating} count={count} />
-                </Card.Text>
-
-            </Card.Body>
-        </Card>
-    )
+    if( loading ) {
+        return(
+            <>
+                <Card className='my-3 p-3 rounded'>
+                    
+                    <Card.Body>
+                        <Loader/>
+                    </Card.Body>
+                </Card>
+            </>
+        )
+    } else if(error) {
+        return(
+            <>
+                <Message variant='danger'> {error} </Message>
+            </>
+        )
+    } else {
+        return(
+            <>
+                <Card className='my-3 p-3 rounded'>
+                    <Link to={`/movie/${movie.id}`}>
+                        <Card.Img src={movie.image_url} variant='top'/>
+                    </Link>
+                
+                    <Card.Body>
+                        <Link to={`/movie/${movie.id}`}>
+                            <Card.Title as='div'>
+                                <h4> {movie.title} </h4>
+                            </Card.Title>
+                        </Link>
+                
+                        <Card.Text as='div'>
+                            <Rating avg_rating={ rating[0].avg_rating } count={ parseInt(rating[0].count_rating) } />
+                        </Card.Text>
+                
+                    </Card.Body>
+                </Card>
+            </>
+        )
+    }
 }
 
 export default Movie

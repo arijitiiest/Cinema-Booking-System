@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Footer from "../../Components/Template/Footer/Footer";
 import Navbar from "../../Components/Template/Nav/Nav";
 import Movie from "../../Components/Movie/Movie";
+import Loader from '../../Components/Loader/Loader';
+import Message from '../../Components/Message/Message';
+
 import { listMovies } from '../../actions/moviesAction';
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -20,11 +23,27 @@ const Home = () => {
     
     const movieList = useSelector(state => state.movieList)
     const { loading, movies, error } = movieList
-    
-    return (
-        <div>
-            <Navbar />
-            { loading ? <h2>Loading</h2> : error ? <h3> {error} </h3> : 
+
+    if( loading ) {
+        return(
+            <div>
+                <Navbar/>
+                <Loader />
+                <Footer/>
+            </div>
+        )
+    } else if(error) {
+        return(
+            <div>
+                <Navbar/>
+                <Message variant='danger'> {error} </Message>
+                <Footer/>
+            </div>
+        )
+    } else {
+        return(
+            <div>
+                <Navbar/>
                 <main className="py-3">
                     <Container>
                         <h1>Latest Movies</h1>
@@ -37,10 +56,10 @@ const Home = () => {
                         </Row>
                     </Container>
                 </main>
-            }
-            <Footer />
-        </div>
-    )
+                <Footer/>
+            </div>
+        )
+    }
 }
 
 export default Home;

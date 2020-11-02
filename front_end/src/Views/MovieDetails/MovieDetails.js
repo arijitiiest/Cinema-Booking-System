@@ -1,6 +1,9 @@
 import React,{ useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button, Container } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux';
+import { detailMovie } from '../../actions/moviesAction'
+
 import Rating from '../../Components/Rating/Rating'
 import Navbar from '../../Components/Template/Nav/Nav'
 import axios from 'axios'
@@ -8,15 +11,16 @@ import './MovieDetails.css'
 
 const MovieDetails = ({ match }) => {
 
-    const [movie, setMovie] = useState({});
+    const id = match.params.id
+    const dispatch = useDispatch()
     useEffect(() => {
-        const fetchMovie = async () => {
-            const { data } = await axios.get(`/api/movie/${match.params.id}`);
-            setMovie(data);
-        }
+        dispatch(detailMovie(id))
+    }, [dispatch, id])  
 
-        fetchMovie()
-    }, [match.params.id])  
+    const movieDetail = useSelector(state => state.movieDetail)
+    const { loading, error, movie } = movieDetail
+
+    
 
     const [rating, setRating] = useState([{}]);
     useEffect(() => {
@@ -31,7 +35,7 @@ const MovieDetails = ({ match }) => {
     const count = parseInt(count_rating)
 
     // eslint-disable-next-line 
-    const { id, title, desc, genres, casts, crews, running_time, format, languages, age_level, image_url} = movie
+    const { title, desc, genres, casts, crews, running_time, format, languages, age_level, image_url} = movie
 
     return (
         <>

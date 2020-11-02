@@ -9,6 +9,7 @@ import "./App.css";
 import Home from "./Views/Home/Home";
 import Login from "./Views/Login/Login";
 import Register from "./Views/Register/Register";
+// eslint-disable-next-line
 import Error404 from "./Views/Error404/Error404";
 import AdminView from "./Views/Admin/Admin";
 import MovieDetails from "./Views/MovieDetails/MovieDetails";

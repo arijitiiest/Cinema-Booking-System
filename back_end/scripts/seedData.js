@@ -262,13 +262,71 @@ sequelize
   })
   .then(
     () =>
-    Shows.bulkCreate([{
+    Shows.bulkCreate([
+    {
       movieId: 1,
       showtime: "9.00 pm",
       screen: "A",
       date: "2020-10-28",
       language: "English",
-    }])
+    },
+    {
+      movieId: 2,
+      showtime: "9.00 pm",
+      screen: "A",
+      date: "2020-10-28",
+      language: "English",
+    },
+    {
+      movieId: 3,
+      showtime: "9.00 pm",
+      screen: "A",
+      date: "2020-10-28",
+      language: "English",
+    },
+    {
+      movieId: 1,
+      showtime: "11.00 pm",
+      screen: "B",
+      date: "2020-10-28",
+      language: "English",
+    },
+    {
+      movieId: 4,
+      showtime: "9.00 pm",
+      screen: "A",
+      date: "2020-10-28",
+      language: "English",
+    },
+    {
+      movieId: 5,
+      showtime: "9.00 pm",
+      screen: "A",
+      date: "2020-10-28",
+      language: "English",
+    },
+    {
+      movieId: 6,
+      showtime: "9.00 pm",
+      screen: "A",
+      date: "2020-10-28",
+      language: "English",
+    },
+    {
+      movieId: 7,
+      showtime: "9.00 pm",
+      screen: "A",
+      date: "2020-10-28",
+      language: "English",
+    },
+    {
+      movieId: 8,
+      showtime: "9.00 pm",
+      screen: "A",
+      date: "2020-10-28",
+      language: "English",
+    }
+  ])
   )
   .then(async () => {
     console.log("Shows seeded");

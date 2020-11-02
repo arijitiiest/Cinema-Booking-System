@@ -13,6 +13,7 @@ import {
   ArrayInput,
   SimpleFormIterator,
   ChipField,
+  // eslint-disable-next-line
   UrlField,
   RadioButtonGroupInput,
 } from "react-admin";
