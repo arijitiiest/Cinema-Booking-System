@@ -6,15 +6,15 @@ import { LinkContainer } from 'react-router-bootstrap';
 const Nav = () => {
     return (
         <div>
-            <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+            <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect style={{padding: ".5rem"}}>
             
+              <Container fluid style={{padding: "0 3rem"}}>
               <LinkContainer to='/'>
-                <Navbar.Brand>Cholochitro Bhobon</Navbar.Brand>
+                <Navbar.Brand> <div style={{fontSize: 28, letterSpacing: 2}}>Cholochitro Bhobon</div></Navbar.Brand>
               </LinkContainer>            
               
-              <Container>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
+              <Navbar.Collapse id="basic-navbar-nav" style={{fontSize: 14}}>
                 <Navb className="ml-auto">
                 <LinkContainer to='/shows'>
                   <Navb.Link> <i className="fas fa-film"></i> Shows</Navb.Link>
