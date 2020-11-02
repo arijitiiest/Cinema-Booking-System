@@ -11,7 +11,7 @@ const Movie = ({ movie }) => {
         <>
             <Card className='my-3 p-3 rounded'>
                 <Link to={`/movie/${movie.id}`}>
-                    <Card.Img src={movie.image_url} variant='top'/>
+                    <Card.Img src={`/media/${movie.image_url}`} variant='top'/>
                 </Link>
             
                 <Card.Body>
@@ -22,7 +22,7 @@ const Movie = ({ movie }) => {
                     </Link>
             
                     <Card.Text as='div'>
-                        <Rating id={movie.id}/>
+                        <Rating key={movie.id} id={movie.id}/>
                     </Card.Text>
             
                 </Card.Body>

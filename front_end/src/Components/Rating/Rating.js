@@ -20,7 +20,7 @@ const Rating = ({ id }) => {
     if(loading) {
         return(
             <div>
-                <h3>Loading rating..</h3>
+                <h5>Loading rating..</h5>
             </div>
         )
     

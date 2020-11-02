@@ -23,7 +23,7 @@ const Movies = sequelize.define("movies", {
   age_level: Sequelize.INTEGER,
   image_url: {
     type: Sequelize.STRING,
-    defaultValue: "/media/default.jpeg",
+    defaultValue: "default.jpg",
   },
 });
 

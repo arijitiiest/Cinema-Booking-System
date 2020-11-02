@@ -52,9 +52,9 @@ const MovieDetails = ({ match }) => {
                 <Row >
                     <Col md={1}></Col>
                     <Col md={3} className='givepadding'>
-                        <Image src={image_url} alt={title} fluid style={{ width: "100%", height: "700px"}} /> 
+                        <Image src={`/media/${image_url}`} alt={title} fluid style={{ width: "100%", height: "700px"}} /> 
                     </Col>
-                    <Col md={3} className='givepadding'>
+                    <Col id={id} md={3} className='givepadding'>
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
                                 <h2> {title} </h2>

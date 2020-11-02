@@ -60,10 +60,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/default.jpeg",
+        image_url: "default.jpg",
       },
       {
-        title: "Joker",
+        title: "Devi",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -81,10 +81,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/devi.jpg",
+        image_url: "devi.jpg",
       },
       {
-        title: "Joker",
+        title: "Gupigayin",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -102,10 +102,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/gupigayin.jpg",
+        image_url: "gupigayin.jpg",
       },
       {
-        title: "Joker",
+        title: "Sonarkella",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -123,10 +123,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/sonarkella.jpg",
+        image_url: "sonarkella.jpg",
       },
       {
-        title: "Joker",
+        title: "Two Daughters",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -144,10 +144,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/twodaughters.jpg",
+        image_url: "twodaughters.jpg",
       },
       {
-        title: "Joker",
+        title: "Joybaba Felunath",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -165,10 +165,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/gupigayin.jpg",
+        image_url: "joybaba.jpg",
       },
       {
-        title: "Joker",
+        title: "Two Daughters",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -186,10 +186,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/twodaughters.jpg",
+        image_url: "twodaughters.jpg",
       },
       {
-        title: "Joker",
+        title: "Devi",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -207,10 +207,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/devi1.jpg",
+        image_url: "devi.jpg",
       },
       {
-        title: "Joker",
+        title: "Gupigayin Baghabain",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -228,10 +228,10 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/gupigayin.jpg",
+        image_url: "gupigayin.jpg",
       },
       {
-        title: "Joker",
+        title: "Sonarkella",
         desc: "Joker is a 2019 American psychological thriller film.",
         genres: ["comedy", "crime", "psychological thriller"],
         casts: [
@@ -249,7 +249,7 @@ sequelize
         format: "3D",
         languages: ["English", "Hindi"],
         age_level: 12,
-        image_url: "/media/sonarkella.jpg",
+        image_url: "sonarkella.jpg",
       },
     ])
   )
