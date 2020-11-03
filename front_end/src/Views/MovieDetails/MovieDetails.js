@@ -1,6 +1,6 @@
-import React,{ useEffect } from 'react'
+import React,{ useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { detailMovie } from '../../actions/moviesAction'
 
@@ -12,9 +12,14 @@ import Navbar from '../../Components/Template/Nav/Nav'
 import './MovieDetails.css'
 import Footer from '../../Components/Template/Footer/Footer';
 
-const MovieDetails = ({ match }) => {
+const MovieDetails = ({ history, match }) => {
 
     const id = match.params.id
+    const [language, setLanguage] = useState()
+    const findShowHandler = () => {
+        history.push(`/shows?movie_id=${id}&language=${language}`)
+    }
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(detailMovie(id))
@@ -68,19 +73,19 @@ const MovieDetails = ({ match }) => {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <h5>Genres: </h5>
-                                { genres && genres.map(genre => (<strong> {genre} </strong>)) }
+                                { genres && genres.map((genre, key) => (<strong key={key}> {genre} </strong>)) }
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <h5> Casts:</h5>
-                                { casts && casts.map(cast => (<strong> {cast} </strong>)) }
+                                { casts && casts.map((cast, key) => (<strong key={key}> {cast} </strong>)) }
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <h5> Crews:</h5>
-                                { crews && crews.map(crew => (<strong> {crew} </strong>)) }
+                                { crews && crews.map((crew, key) => (<strong key={key}> {crew} </strong>)) }
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <h5> Languges :</h5>
-                                 { languages && languages.map(language => (<strong> {language} </strong>)) }
+                                 { languages && languages.map((lang, key) => (<strong key={key}> {lang} </strong>)) }
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <h5> Other Details :</h5>
@@ -94,10 +99,23 @@ const MovieDetails = ({ match }) => {
                                 <ListGroup.Item>
                                     <h3> Book Shows </h3>
                                 </ListGroup.Item>
+
                                 <ListGroup.Item>
-                                    <Link to={`/`}>
-                                        <Button className='btn-block btn-dark' type='button'>Find Shows</Button>
-                                    </Link>
+                                    <Row>
+                                        <Col>
+                                            <h5 style={{padding: '10px'}}>Language : </h5>
+                                        </Col>
+                                        <Col xs={7}>
+                                            
+                                            <Form.Control as='select' value={language} onChange={ e =>setLanguage(e.target.value) } >
+                                                { ['select language', ...languages].map((language, id) => (<option key={id} value={language} > {language} </option>))  }
+                                            </Form.Control>
+                                        </Col>
+                                    </Row>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <Button onClick={findShowHandler} className='btn-block btn-dark' type='button'>Find Shows</Button>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card>
