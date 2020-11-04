@@ -17,7 +17,11 @@ const MovieDetails = ({ history, match }) => {
     const id = match.params.id
     const [language, setLanguage] = useState()
     const findShowHandler = () => {
-        history.push(`/shows?movie_id=${id}&language=${language}`)
+        
+        if(language === undefined || language === 'select language')
+            alert("Select a language");
+        else
+            history.push(`/showbylang?movie_id=${id}&language=${language}`)
     }
 
     const dispatch = useDispatch()

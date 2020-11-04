@@ -14,6 +14,7 @@ import Error404 from "./Views/Error404/Error404";
 import AdminView from "./Views/Admin/Admin";
 import MovieDetails from "./Views/MovieDetails/MovieDetails";
 import AllShows from "./Views/AllShows/AllShows";
+import ShowbyLang from "./Views/ShowbyLang/ShowbyLang";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/shows" component={AllShows} />
+            <Route exact path="/showbylang" component={ShowbyLang} />
             <Route exact path="/movie/:id" component={MovieDetails} />
             {/* <Route component={Error404} status={404} /> */}
           </Provider>
