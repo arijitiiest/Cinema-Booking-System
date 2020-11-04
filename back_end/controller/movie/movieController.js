@@ -163,7 +163,10 @@ exports.getShows = async (req, res, next) => {
       .then((movie) => {
         if (!movie) throw new Error("No movie");
         return movie
-          .getShows({ where: { language } })
+          .getShows({
+            include: [ Movies],
+            where: { language },
+          })
           .then((shows) => {
             res.status(200).json(shows);
           })
