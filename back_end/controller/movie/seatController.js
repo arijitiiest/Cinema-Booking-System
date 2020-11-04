@@ -1,6 +1,12 @@
 const Seats = require("../../models/Seats");
 const SeatStatus = require("../../models/SeatStatus");
 
+const sequelize = require("../../db");
+const { Transaction } = require("sequelize");
+
+const sleep = (waitTimeInMs) =>
+  new Promise((resolve) => setTimeout(resolve, waitTimeInMs));
+
 exports.getSeats = (req, res, next) => {
   const screen = req.query.screen;
   const date = req.query.date;
@@ -75,34 +81,84 @@ exports.postSeatStatus = (req, res, next) => {
   const showtime = req.body.showtime;
   const status = req.body.status;
 
-  SeatStatus.findAll({ where: { date, showtime, status, seatId } }).then(
-    (seat) => {
-      if (seat.length != 0) {
-        res.status(401).json({ status: 401, message: "Already booked" });
-        return;
-      } else {
-        Seats.findByPk(seatId)
-          .then((seat) => {
-            if (!seat) throw new Error("Seat not found");
-            // console.log(seat);
-            return seat
-              .createSeatstatus({ date, showtime, status })
-              .then((result) => {
-                res.status(201).json({ status: 201, ...result.dataValues });
-              })
-              .catch((err) => {
-                throw err;
-              });
-          })
-          .catch((err) => {
-            console.log(err);
-            res
-              .status(401)
-              .json({ status: 401, message: "Somethong went wrong" });
-          });
-      }
-    }
-  );
+  sequelize
+    .transaction({ isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE })
+    .then((t) => {
+      SeatStatus.findAll({
+        where: { date, showtime, status, seatId },
+        lock: true,
+        transaction: t,
+      }).then((seat) => {
+        if (seat.length != 0) {
+          res.status(401).json({ status: 401, message: "Already booked" });
+          return;
+        } else {
+          Seats.findByPk(seatId, { transaction: t })
+            // .then(async (seat) => {
+            //   await sleep(10000);
+            //   return seat;
+            // })
+            .then((seat) => {
+              if (!seat) throw new Error("Seat not found");
+              // console.log(seat);
+              return seat
+                .createSeatstatus(
+                  { date, showtime, status },
+                  { transaction: t }
+                )
+                .then(async (result) => {
+                  await t.commit();
+                  return result;
+                })
+                .then((result) => {
+                  res.status(201).json({ status: 201, ...result.dataValues });
+                })
+                .catch((err) => {
+                  throw err;
+                });
+            })
+            .catch((err) => {
+              // console.log(err);
+              t.rollback();
+              res
+                .status(401)
+                .json({
+                  status: 401,
+                  message: "Somethong went wrong, maybe already booked",
+                });
+            });
+        }
+      });
+    });
+
+  // SeatStatus.findAll({ where: { date, showtime, status, seatId } }).then(
+  //   (seat) => {
+  //     if (seat.length != 0) {
+  //       res.status(401).json({ status: 401, message: "Already booked" });
+  //       return;
+  //     } else {
+  //       Seats.findByPk(seatId)
+  //         .then((seat) => {
+  //           if (!seat) throw new Error("Seat not found");
+  //           // console.log(seat);
+  //           return seat
+  //             .createSeatstatus({ date, showtime, status })
+  //             .then((result) => {
+  //               res.status(201).json({ status: 201, ...result.dataValues });
+  //             })
+  //             .catch((err) => {
+  //               throw err;
+  //             });
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //           res
+  //             .status(401)
+  //             .json({ status: 401, message: "Somethong went wrong" });
+  //         });
+  //     }
+  //   }
+  // );
 };
 
 exports.getNoOfEmptySeats = async (req, res, next) => {
