@@ -40,4 +40,6 @@ router.delete("/seats/:id", seatController.deleteSeat);
 
 router.post("/seatstatus", seatController.postSeatStatus);
 
+router.get("/emptyseats", seatController.getNoOfEmptySeats);
+
 module.exports = router;

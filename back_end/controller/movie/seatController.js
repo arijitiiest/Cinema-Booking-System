@@ -70,26 +70,77 @@ exports.deleteSeat = (req, res, next) => {
 // exports.getSeatStatus = (req, res, next) => {};
 
 exports.postSeatStatus = (req, res, next) => {
-  const seat_id = req.body.seat_id;
+  const seatId = req.body.seat_id;
   const date = req.body.date;
   const showtime = req.body.showtime;
   const status = req.body.status;
 
-  Seats.findByPk(seat_id)
-    .then((seat) => {
-      if (!seat) throw new Error("Seat not found");
-      console.log(seat);
-      return seat
-        .createSeatstatus({ date, showtime, status })
-        .then((result) => {
-          res.status(201).json({ status: 201, ...result.dataValues });
+  SeatStatus.findAll({ where: { date, showtime, status, seatId } }).then(
+    (seat) => {
+      if (seat.length != 0) {
+        res.status(401).json({ status: 401, message: "Already booked" });
+        return;
+      } else {
+        Seats.findByPk(seatId)
+          .then((seat) => {
+            if (!seat) throw new Error("Seat not found");
+            // console.log(seat);
+            return seat
+              .createSeatstatus({ date, showtime, status })
+              .then((result) => {
+                res.status(201).json({ status: 201, ...result.dataValues });
+              })
+              .catch((err) => {
+                throw err;
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+            res
+              .status(401)
+              .json({ status: 401, message: "Somethong went wrong" });
+          });
+      }
+    }
+  );
+};
+
+exports.getNoOfEmptySeats = async (req, res, next) => {
+  const screen = req.query.screen;
+  const date = req.query.date;
+  const showtime = req.query.showtime;
+
+  if (!screen && !date && !showtime) {
+    res
+      .status(401)
+      .json({ status: 401, message: "Include screen date showtime" });
+  } else {
+    Seats.count({ where: { screen } })
+      .then((total) => {
+        Seats.count({
+          where: { screen },
+          include: [
+            {
+              model: SeatStatus,
+              where: { date, showtime },
+              required: true,
+            },
+          ],
         })
-        .catch((err) => {
-          throw err;
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(401).json({ status: 401, message: "Somethong went wrong" });
-    });
+          .then((seats) => {
+            if (!seats) throw new Error("No seats");
+            res.status(200).json(total - seats);
+          })
+          .catch((err) => {
+            // console.log(err);
+            res
+              .status(401)
+              .json({ status: 401, message: "Somethong went wrong" });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(401).json({ status: 401, message: "Screen not found" });
+      });
+  }
 };
