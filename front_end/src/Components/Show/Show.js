@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, ListGroup } from 'react-bootstrap'
+import { Card, ListGroup, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Show = ({ show }) => {
@@ -30,7 +30,7 @@ const Show = ({ show }) => {
                             </ListGroup.Item>
                         </ListGroup>
                     </Card.Text>
-                    <Link className='btn btn-dark my-3' to='/' style={{width: '160px', height: 'auto', right: '0', position: 'relative' }} >Book Ticket</Link>
+                    <Button className='btn btn-dark my-3'>Book Ticket</Button>
                 </Card.Body>
                 
                 

@@ -1,5 +1,5 @@
 import React,{ useEffect } from "react";
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Image, ListGroup } from 'react-bootstrap';
 import Footer from "../../Components/Template/Footer/Footer";
 import Navbar from "../../Components/Template/Nav/Nav";
 import ShowbyMovie from "../../Components/ShowbyMovie/ShowbyMovie";
@@ -49,22 +49,27 @@ const ShowbyLang = ({ location }) => {
             )
         }
         else{
+            const movie = shows[0].movie;
             return (
                 <div>
                     <Navbar />
-                    <Link className='btn btn-dark my-3' to={`/movie/${movie_id}`}>Go Back</Link>
+                    <Link className='btn btn-dark my-3' to={`/movie/${movie_id}`} >Go Back</Link>
                     <main className="py-3">
                         <Container>
-                            <h1> {} </h1>
-                            <Row>
-                                <Col>
-                                </Col>
-                                <Col sm={24} md={12} lg={8} xl={6}>
-                                    {shows.map(show => (
+                            <ListGroup variant='flush'>
+                                <ListGroup.Item>
+                                    <h1> {movie.title} </h1>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                    <Image src={`/media/show/${movie.image_url}`} alt={movie.title} fluid /> 
+                                </ListGroup.Item>
+
+                                {shows.map((show, key) => (
+                                    <ListGroup.Item key={key}>
                                         <ShowbyMovie key={show.id} show={show}  />
-                                    ))}
-                                </Col>
-                            </Row>
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
                         </Container>
                     </main>
                     <Footer />
