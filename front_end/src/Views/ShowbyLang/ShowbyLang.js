@@ -38,27 +38,39 @@ const ShowbyLang = ({ location }) => {
             </div>
         )
     } else{
-        return (
-            <div>
-                <Navbar />
-                <Link className='btn btn-dark my-3' to={`/movie/${movie_id}`}>Go Back</Link>
-                <main className="py-3">
-                    <Container>
-                        <h1>Latest Shows</h1>
-                        <Row>
-                            <Col>
-                            </Col>
-                            <Col sm={24} md={12} lg={8} xl={6}>
-                                {shows.map(show => (
-                                    <ShowbyMovie key={show.id} show={show}  />
-                                ))}
-                            </Col>
-                        </Row>
-                    </Container>
-                </main>
-                <Footer />
-            </div>
-        )
+
+        if(shows.length === 0){
+            return(
+                <div>
+                    <Navbar/>
+                    <Message children='Currently no shows are available please check after some time' />
+                    <Footer/>
+                </div>
+            )
+        }
+        else{
+            return (
+                <div>
+                    <Navbar />
+                    <Link className='btn btn-dark my-3' to={`/movie/${movie_id}`}>Go Back</Link>
+                    <main className="py-3">
+                        <Container>
+                            <h1> {} </h1>
+                            <Row>
+                                <Col>
+                                </Col>
+                                <Col sm={24} md={12} lg={8} xl={6}>
+                                    {shows.map(show => (
+                                        <ShowbyMovie key={show.id} show={show}  />
+                                    ))}
+                                </Col>
+                            </Row>
+                        </Container>
+                    </main>
+                    <Footer />
+                </div>
+            )
+        }
     }
 }
 

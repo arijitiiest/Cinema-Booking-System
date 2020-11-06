@@ -11,10 +11,10 @@ const ShowbyMovie = ({ show }) => {
                         <h3> {show.movie.title} </h3>
                     </Card.Header>
                 </Link> */}
-                {/* <Link to={`/show/${show.id}`}>
+                <Link to={`/show/${show.id}`}>
                     <Card.Img src={`/media/show/${show.movie.image_url}`} variant='top' />
                 </Link>
-             */}
+            
                 <Card.Body>
                     
                     <Card.Text as='div'>
@@ -26,7 +26,7 @@ const ShowbyMovie = ({ show }) => {
                                 <h5> LANGUAGE : { show.language } </h5>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                {/* <h5> CINEMA SCREEN : { show.screen } in {show.movie.format} format </h5> */}
+                                <h5> CINEMA SCREEN : { show.screen } in {show.movie.format} format </h5>
                             </ListGroup.Item>
                         </ListGroup>
                     </Card.Text>
