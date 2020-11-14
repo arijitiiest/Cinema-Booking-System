@@ -15,7 +15,7 @@ import AdminView from "./Views/Admin/Admin";
 import MovieDetails from "./Views/MovieDetails/MovieDetails";
 import AllShows from "./Views/AllShows/AllShows";
 import ShowbyLang from "./Views/ShowbyLang/ShowbyLang";
-
+import seatarrangement from './Views/SeatArrangement/SeatArrangement'
 function App() {
   return (
     <div className="App">
@@ -29,6 +29,7 @@ function App() {
             <Route exact path="/shows" component={AllShows} />
             <Route exact path="/showbylang" component={ShowbyLang} />
             <Route exact path="/movie/:id" component={MovieDetails} />
+            <Route exact path="/seatarrangement" component={seatarrangement} />
             {/* <Route component={Error404} status={404} /> */}
           </Provider>
         </Switch>

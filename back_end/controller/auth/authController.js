@@ -18,7 +18,7 @@ exports.postLogin = async (req, res, next) => {
     }
 
     if (bcrypt.compareSync(password, user.dataValues.password)) {
-      const token = jwt.sign(user.dataValues.user_id, process.env.SECRET_KEY);
+      const token = jwt.sign(user.dataValues.id, process.env.SECRET_KEY);
       res
         .status(200)
         .json({ status: 200, token: token, message: "Login successful" });

@@ -3,6 +3,9 @@ import { Card, ListGroup, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Show = ({ show }) => {
+    const onClickHandler = () => {
+        
+    }
     return (
         <>
             <Card className='my-3 p-3 rounded'>
@@ -30,7 +33,9 @@ const Show = ({ show }) => {
                             </ListGroup.Item>
                         </ListGroup>
                     </Card.Text>
-                    <Button className='btn btn-dark my-3'>Book Ticket</Button>
+                    <Link to='/login?redirect=seatarrangement'>
+                        <Button className='btn btn-dark my-3' onClick={onClickHandler} >Book Ticket</Button>
+                    </Link>
                 </Card.Body>
                 
                 
