@@ -21,7 +21,7 @@ exports.postLogin = async (req, res, next) => {
       const token = jwt.sign(user.dataValues.id, process.env.SECRET_KEY);
       res
         .status(200)
-        .json({ status: 200, token: token, message: "Login successful" });
+        .json({ status: 200, id: user.id, first_name: user.first_name, last_name: user.last_name, email: user.email, token: token, message: "Login successful" });
     } else {
       const err = new Error("Password incorrect");
       err.status = 401;

@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { movieListReducer, movieDetailReducer } from './reducers/movieReducers'
 import { ratingDetailsReducer } from './reducers/ratingDetailsReducer'
 import { showListReducer, showDetailReducer, showbyLangListReducer } from './reducers/showReducers'
-import  { userLoginReducer } from './reducers/userReducers'
+import  { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 
 
 const reducer = combineReducers({
@@ -14,7 +14,8 @@ const reducer = combineReducers({
     showList: showListReducer,
     showDetail: showDetailReducer,
     showbyLangList: showbyLangListReducer,
-    userLogin: userLoginReducer
+    userLogin: userLoginReducer,
+    userRegister: userRegisterReducer
 })
 
 const initialState = {}
