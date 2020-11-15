@@ -256,89 +256,114 @@ sequelize
   .then(async () => {
     console.log("Movies seeded");
   })
-  .then(() => Shows.sync({force: true}))
+  .then(() => Shows.sync({ force: true }))
   .then(async () => {
     console.log("Shows synced");
   })
-  .then(
-    () =>
+  .then(() =>
     Shows.bulkCreate([
-    {
-      movieId: 1,
-      showtime: "9.00 pm",
-      screen: "A",
-      date: "2020-10-28",
-      language: "English",
-    },
-    {
-      movieId: 2,
-      showtime: "9.00 pm",
-      screen: "A",
-      date: "2020-10-28",
-      language: "English",
-    },
-    {
-      movieId: 3,
-      showtime: "9.00 pm",
-      screen: "A",
-      date: "2020-10-28",
-      language: "English",
-    },
-    {
-      movieId: 1,
-      showtime: "11.00 pm",
-      screen: "B",
-      date: "2020-10-28",
-      language: "English",
-    },
-    {
-      movieId: 4,
-      showtime: "9.00 pm",
-      screen: "A",
-      date: "2020-10-28",
-      language: "English",
-    },
-    {
-      movieId: 5,
-      showtime: "9.00 pm",
-      screen: "A",
-      date: "2020-10-28",
-      language: "English",
-    },
-    {
-      movieId: 6,
-      showtime: "9.00 pm",
-      screen: "A",
-      date: "2020-10-28",
-      language: "English",
-    },
-    {
-      movieId: 7,
-      showtime: "9.00 pm",
-      screen: "A",
-      date: "2020-10-28",
-      language: "English",
-    },
-    {
-      movieId: 8,
-      showtime: "9.00 pm",
-      screen: "A",
-      date: "2020-10-28",
-      language: "English",
-    }
-  ])
+      {
+        movieId: 1,
+        showtime: "9.00 pm",
+        screen: "A",
+        date: "2020-10-28",
+        language: "English",
+      },
+      {
+        movieId: 2,
+        showtime: "9.00 pm",
+        screen: "A",
+        date: "2020-10-28",
+        language: "English",
+      },
+      {
+        movieId: 3,
+        showtime: "9.00 pm",
+        screen: "A",
+        date: "2020-10-28",
+        language: "English",
+      },
+      {
+        movieId: 1,
+        showtime: "11.00 pm",
+        screen: "B",
+        date: "2020-10-28",
+        language: "English",
+      },
+      {
+        movieId: 4,
+        showtime: "9.00 pm",
+        screen: "A",
+        date: "2020-10-28",
+        language: "English",
+      },
+      {
+        movieId: 5,
+        showtime: "9.00 pm",
+        screen: "A",
+        date: "2020-10-28",
+        language: "English",
+      },
+      {
+        movieId: 6,
+        showtime: "9.00 pm",
+        screen: "A",
+        date: "2020-10-28",
+        language: "English",
+      },
+      {
+        movieId: 7,
+        showtime: "9.00 pm",
+        screen: "A",
+        date: "2020-10-28",
+        language: "English",
+      },
+      {
+        movieId: 8,
+        showtime: "9.00 pm",
+        screen: "A",
+        date: "2020-10-28",
+        language: "English",
+      },
+    ])
   )
   .then(async () => {
     console.log("Shows seeded");
   })
-  //   .then(() => Seats.sync({ force: true }))
-  //   .then(async () => {
-  //     console.log("Seats synced");
-  //   })
-  //   .then(() => Seats.bulkCreate([{}]))
-  //   .then(async () => {
-  //     console.log("Seats seeded");
-  //   })
+  .then(() => Seats.sync({ force: true }))
+  .then(async () => {
+    console.log("Seats synced");
+  })
+  .then(() =>
+    Seats.bulkCreate([
+      {
+        row_no: "A",
+        col_no: "1",
+        screen: "A",
+        price: 100,
+      },
+    ])
+  )
+  .then(async () => {
+    console.log("Seats seeded");
+  })
+  .then(() => SeatStatus.sync({ force: true }))
+  .then(async () => {
+    console.log("SeatStatus synced");
+  })
+  .then(() =>
+    SeatStatus.bulkCreate([
+      {
+        date: "2020-11-15",
+        showtime: "9.00 pm",
+        status: "booked",
+        seatId: 1,
+      },
+    ])
+  )
+  .then(async () => {
+    console.log("SeatStatus seeded");
+  })
   .then(() => {
     console.log("OK");
   })
