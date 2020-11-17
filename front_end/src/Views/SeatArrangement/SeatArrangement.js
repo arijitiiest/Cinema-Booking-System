@@ -13,8 +13,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Theaters } from "@material-ui/icons";
+import axios from "axios";
 
 import SeatMatrix from "../../Components/SeatMatrix/SeatMatrix";
+import { screen } from "../../assets";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     height: 40,
     flex: 1,
     justifyContent: "center",
-    boxShadow: "none"
+    boxShadow: "none",
   },
   title: {
     flexGrow: 1,
@@ -51,6 +53,17 @@ const SeatArrangement = () => {
     date: "2020-10-27",
     screen: "A",
   });
+  const [seatMatrixData, setSeatMatrixData] = React.useState();
+
+  React.useEffect(() => {
+    axios
+      .get(
+        `http://localhost:5000/api/seats?screen=${movieDetails.screen}&date=${movieDetails.date}&showtime=${movieDetails.showtime}`
+      )
+      .then((res) => {
+        setSeatMatrixData(res.data);
+      });
+  }, [movieDetails]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -102,7 +115,25 @@ const SeatArrangement = () => {
         </Toolbar>
       </AppBar>
 
-      <SeatMatrix />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          padding: "3rem",
+        }}
+      >
+        <div>All eyes this way please</div>
+        <img
+          src={screen}
+          alt="screen"
+          width="350px"
+          height="10px"
+          style={{ transform: "rotate(180deg)", opacity: "0.7" }}
+        />
+      </div>
+
+      <SeatMatrix data={seatMatrixData} />
 
       <Dialog
         open={open}

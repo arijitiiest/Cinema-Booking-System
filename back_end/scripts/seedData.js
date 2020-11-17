@@ -342,6 +342,150 @@ sequelize
         screen: "A",
         price: 100,
       },
+      {
+        row_no: "A",
+        col_no: "2",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "A",
+        col_no: "3",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "A",
+        col_no: "4",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "A",
+        col_no: "5",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "B",
+        col_no: "1",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "B",
+        col_no: "2",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "B",
+        col_no: "3",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "B",
+        col_no: "4",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "B",
+        col_no: "5",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "C",
+        col_no: "1",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "C",
+        col_no: "2",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "C",
+        col_no: "3",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "C",
+        col_no: "4",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "C",
+        col_no: "5",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "D",
+        col_no: "1",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "D",
+        col_no: "2",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "D",
+        col_no: "3",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "D",
+        col_no: "4",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "D",
+        col_no: "5",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "E",
+        col_no: "1",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "E",
+        col_no: "2",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "E",
+        col_no: "3",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "E",
+        col_no: "4",
+        screen: "A",
+        price: 100,
+      },
+      {
+        row_no: "E",
+        col_no: "5",
+        screen: "A",
+        price: 100,
+      },
     ])
   )
   .then(async () => {
@@ -354,7 +498,7 @@ sequelize
   .then(() =>
     SeatStatus.bulkCreate([
       {
-        date: "2020-11-15",
+        date: "2020-10-27",
         showtime: "9.00 pm",
         status: "booked",
         seatId: 1,
