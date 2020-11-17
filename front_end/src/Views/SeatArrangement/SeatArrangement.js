@@ -1,22 +1,56 @@
 import React from "react";
 import {
+  AppBar,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  makeStyles,
   Slide,
+  Toolbar,
+  Typography,
 } from "@material-ui/core";
-import { ConfirmationNumber, Theaters } from "@material-ui/icons";
+import { Theaters } from "@material-ui/icons";
+
+import SeatMatrix from "../../Components/SeatMatrix/SeatMatrix";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  appbar: {
+    backgroundColor: "#343A40",
+  },
+  appbarDatetime: {
+    backgroundColor: "#F5F5FA",
+    height: 40,
+    flex: 1,
+    justifyContent: "center",
+    boxShadow: "none"
+  },
+  title: {
+    flexGrow: 1,
+    color: "white",
+  },
+}));
+
 const SeatArrangement = () => {
+  const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [noOfSeats, setNoOfSeats] = React.useState(2);
+  const [movieDetails, setMovieDetails] = React.useState({
+    title: "Joker",
+    format: "3D",
+    showtime: "9.00 pm",
+    date: "2020-10-27",
+    screen: "A",
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,13 +65,44 @@ const SeatArrangement = () => {
     setOpen(false);
   };
 
-
   return (
     <div>
-    
-        
+      <AppBar position="static" className={classes.appbar}>
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            <div>CHOLOCHITRO BHOBON</div>
+            <div style={{ fontFamily: "monospace", fontSize: 12 }}>
+              {movieDetails.title} {movieDetails.format.toUpperCase()}
+            </div>
+          </Typography>
+          <Button variant="contained" color="primary" onClick={handleClickOpen}>
+            {noOfSeats} Tickets
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <AppBar position="static" className={classes.appbarDatetime}>
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                fontFamily: "monospace",
+                fontSize: 14,
+                color: "gray",
+              }}
+            >
+              <div>
+                {movieDetails.date} {movieDetails.showtime}
+              </div>
+              <div>Screen {movieDetails.screen}</div>
+              <div style={{ width: "150px" }}></div>
+            </div>
+          </Typography>
+        </Toolbar>
+      </AppBar>
 
-
+      <SeatMatrix />
 
       <Dialog
         open={open}
