@@ -5,7 +5,7 @@ import './Movie.css'
 import Rating from '../Rating/Rating'
 
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, reducer_id }) => {
 
     return(
         <>
@@ -22,7 +22,7 @@ const Movie = ({ movie }) => {
                     </Link>
             
                     <Card.Text as='div'>
-                        <Rating key={movie.id} id={movie.id}/>
+                        <Rating id={movie.id} reducer_id={reducer_id}/>
                     </Card.Text>
             
                 </Card.Body>

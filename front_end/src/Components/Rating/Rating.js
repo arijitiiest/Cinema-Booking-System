@@ -5,7 +5,7 @@ import { ratingDetails } from '../../actions/ratingDetailsAction'
 import './Rating.css';
 import Message from '../Message/Message';
 
-const Rating = ({ id }) => {
+const Rating = ({ id, reducer_id }) => {
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -31,14 +31,16 @@ const Rating = ({ id }) => {
             </>
         )
     } else{
-        const count = rating[id] ? parseInt(rating[id].count_rating) : 0
-        const avg_rating = rating[id] ? rating[id].avg_rating : 0
+        const count = rating[reducer_id] ? parseInt(rating[reducer_id].count_rating) : 0
+        
+        const avg_rating = rating[reducer_id] ? rating[reducer_id].avg_rating : 0
         // const count = 5
         // const avg_rating = 4
-        // console.log(rating[id])
+        // console.log(avg_rating)
         if(count === 0){
             return(
                 <div className='rating'>
+                    <h1> {avg_rating} </h1>
                     <span>Yet to be rated</span>
                 </div>
             )

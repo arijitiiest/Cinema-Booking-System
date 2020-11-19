@@ -47,7 +47,7 @@ const MovieDetails = ({ history, match }) => {
             dispatch({ type: MOVIE_CREATE_REVIEW_RESET })
         }
         dispatch(detailMovie(id))
-    }, [dispatch, id])
+    }, [dispatch, id, reviewSuccess])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -91,7 +91,7 @@ const MovieDetails = ({ history, match }) => {
                                 <h2> {title} </h2>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <Rating id={id} />
+                                <Rating id={id} reducer_id={0} />
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <h5> Description : </h5>
