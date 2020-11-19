@@ -19,7 +19,7 @@ export const login = (email, password) => async (dispatch) => {
             payload: data
         })
 
-        // localStorage.setItem('userInfo', JSON.stringify(data)) //pore implement korbo
+        localStorage.setItem('userInfo', JSON.stringify(data)) 
 
     } catch (error) {
         dispatch({

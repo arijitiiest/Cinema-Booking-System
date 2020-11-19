@@ -97,8 +97,7 @@ exports.getReviewData = (req, res, next) => {
 
 exports.getReviews = (req, res, next) => {
   const movie_id = req.query.movie_id;
-
-  Movies.findByPk(movie_id)
+    Movies.findByPk(movie_id)
     .then((movie) => {
       if (!movie) throw new Error("No movie");
       return movie

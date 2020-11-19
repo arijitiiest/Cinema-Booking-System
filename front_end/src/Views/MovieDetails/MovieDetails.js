@@ -2,7 +2,9 @@ import React,{ useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { detailMovie } from '../../actions/moviesAction'
+import { detailMovie, createProductReview } from '../../actions/moviesAction'
+import { MOVIE_CREATE_REVIEW_RESET } from '../../constants/movieConstants'
+
 
 import Loader from '../../Components/Loader/Loader';
 import Message from '../../Components/Message/Message';
@@ -14,6 +16,9 @@ import Footer from '../../Components/Template/Footer/Footer';
 
 const MovieDetails = ({ history, match }) => {
 
+    const [rating, setRating] = useState(0)
+    const [comment, setComment] = useState('')
+
     const id = match.params.id
     const [language, setLanguage] = useState()
     const findShowHandler = () => {
@@ -22,15 +27,32 @@ const MovieDetails = ({ history, match }) => {
             alert("Select a language");
         else
             history.push(`/showbylang?movie_id=${id}&language=${language}`)
-    }
-
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(detailMovie(id))
-    }, [dispatch, id])  
+    }  
 
     const movieDetail = useSelector(state => state.movieDetail)
     const { loading, error, movie } = movieDetail
+
+    const movieCreateReview = useSelector(state => state.movieCreateReview)
+    const { loading: reviewLoading, success: reviewSuccess ,error: reviewError } = movieCreateReview
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if(reviewSuccess){
+            alert('Review Submitted')
+            setRating(0)
+            setComment('')
+            dispatch({ type: MOVIE_CREATE_REVIEW_RESET })
+        }
+        dispatch(detailMovie(id))
+    }, [dispatch, id])
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        dispatch( createProductReview( id, rating, comment ) )
+    }
 
     if (loading) {
         return(
@@ -107,7 +129,7 @@ const MovieDetails = ({ history, match }) => {
                                 <ListGroup.Item>
                                     <Row>
                                         <Col>
-                                            <h5 style={{padding: '10px'}}>Language : </h5>
+                                            <h5 style={{padding: '10px'}}>Language: </h5>
                                         </Col>
                                         <Col xs={7}>
                                             
@@ -123,6 +145,74 @@ const MovieDetails = ({ history, match }) => {
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card>
+                        <div style={{marginTop: '50px'}}></div>
+                        <ListGroup variant='flush'>
+                            <ListGroup.Item >
+                                <h3>Write a Movie Review</h3>
+                            </ListGroup.Item >
+
+                            {reviewSuccess && (
+                                <Message variant='success'>
+                                  Review submitted successfully
+                                </Message>
+                            )}
+                            {reviewLoading && <Loader />}
+                            {reviewError && (
+                              <Message variant='danger'>{reviewError}</Message>
+                            )}
+                            
+                            { userInfo? ( 
+                                <>
+                                    <ListGroup variant='flush'>
+
+                                        <ListGroup.Item>
+                                            <Row>
+                                                <Col>
+                                                    <h5 style={{padding: '10px'}}>Rating: </h5>
+                                                </Col>
+
+                                                <Col xs={7}>
+                                                    <Form.Control
+                                                       as='select'
+                                                       value={rating}
+                                                       onChange={(e) => setRating(e.target.value)}
+                                                    >
+                                                       <option value=''>Select...</option>
+                                                       <option value='1'>1 - Poor</option>
+                                                       <option value='2'>2 - Fair</option>
+                                                       <option value='3'>3 - Good</option>
+                                                       <option value='4'>4 - Very Good</option>
+                                                       <option value='5'>5 - Excellent</option>
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item>
+                                        <ListGroup.Item>
+                                            <Row>
+                                                <Col>
+                                                    <h5 style={{padding: '10px'}}>Comment: </h5>
+                                                </Col>
+
+                                                <Col xs={7}>
+                                                    <Form.Control
+                                                       as='textarea'
+                                                       row='1'
+                                                       value={comment}
+                                                       onChange={(e) => setComment(e.target.value)}
+                                                    ></Form.Control>
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item>
+
+                                        <ListGroup.Item>
+                                            <Button onClick={submitHandler} type='button' disabled={reviewLoading} >Submit</Button>
+                                        </ListGroup.Item>
+                                    </ListGroup>
+                                </>
+                            ) : <Message>Please <Link to='/login'>Sign In</Link> to write a review</Message> }
+                            
+                        </ListGroup>
+                        
                     </Col>
                 </Row> 
             </>

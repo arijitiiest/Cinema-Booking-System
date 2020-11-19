@@ -1,12 +1,12 @@
 import React from 'react'
-import { Card, ListGroup, Button } from 'react-bootstrap'
+import { Card, ListGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 const ShowbyMovie = ({ history, show }) => {
 
 
-    const onClickHandler = () => {
+    // const onClickHandler = () => {
         
-    }
+    // }
 
     return (
         <>
@@ -25,8 +25,8 @@ const ShowbyMovie = ({ history, show }) => {
                                 <h5> CINEMA SCREEN : { show.screen } in {show.movie.format} format </h5>
                             </ListGroup.Item>
                         </ListGroup>
-                        <Link to='/login?redirect=seatarrangement'>
-                            <Button className='btn btn-dark my-3' onClick={onClickHandler} >Book Ticket</Button>
+                        <Link to={`/login?redirect=seatarrangement`} className='btn btn-dark my-3'>
+                            Book Ticket
                         </Link>
                     </Card.Text>
                     
