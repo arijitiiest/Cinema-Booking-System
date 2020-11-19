@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { movieListReducer, movieDetailReducer, movieCreateReviewReducer } from './reducers/movieReducers'
+import { movieListReducer, movieDetailReducer, movieCreateReviewReducer, moviegetReviewReducer } from './reducers/movieReducers'
 import { ratingDetailsReducer } from './reducers/ratingDetailsReducer'
 import { showListReducer, showDetailReducer, showbyLangListReducer } from './reducers/showReducers'
 import  { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
@@ -16,8 +16,8 @@ const reducer = combineReducers({
     showbyLangList: showbyLangListReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
-    movieCreateReview: movieCreateReviewReducer
-    
+    movieCreateReview: movieCreateReviewReducer,
+    moviegetReview: moviegetReviewReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

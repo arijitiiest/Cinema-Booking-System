@@ -1,8 +1,8 @@
 import React,{ useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button, Form, Accordion } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { detailMovie, createProductReview } from '../../actions/moviesAction'
+import { detailMovie, createProductReview, getReviews } from '../../actions/moviesAction'
 import { MOVIE_CREATE_REVIEW_RESET } from '../../constants/movieConstants'
 
 
@@ -38,6 +38,9 @@ const MovieDetails = ({ history, match }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const movieGetReview = useSelector(state => state.moviegetReview)
+    const { reviews } = movieGetReview
+
     const dispatch = useDispatch()
     useEffect(() => {
         if(reviewSuccess){
@@ -47,6 +50,7 @@ const MovieDetails = ({ history, match }) => {
             dispatch({ type: MOVIE_CREATE_REVIEW_RESET })
         }
         dispatch(detailMovie(id))
+        dispatch(getReviews(id))
     }, [dispatch, id, reviewSuccess])
 
     const submitHandler = (e) => {
@@ -100,6 +104,17 @@ const MovieDetails = ({ history, match }) => {
                             <ListGroup.Item>
                                 <h5>Genres: </h5>
                                 { genres && genres.map((genre, key) => (<strong key={key}> {genre} </strong>)) }
+                                {/* <Accordion defaultActiveKey="0">    
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                                        <h5>Genres</h5>
+                                    </Accordion.Toggle>
+                                    
+                                    { genres && genres.map((genre, key) => (
+                                        <Accordion.Collapse eventKey="1">
+                                            <h6> {genre} </h6>
+                                        </Accordion.Collapse>
+                                    )) }
+                                </Accordion> */}
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <h5> Casts:</h5>
@@ -146,10 +161,29 @@ const MovieDetails = ({ history, match }) => {
                             </ListGroup>
                         </Card>
                         <div style={{marginTop: '50px'}}></div>
+                        <Accordion defaultActiveKey="0">
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="1" className='my-1 py-1'>
+                                        <h4>Click to view the Reviews</h4>
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                
+
+                                {reviews && reviews.map((review, key) => (
+                                        <Accordion.Collapse eventKey="1">
+                                            <Card.Body> <h5>{review.rating} start</h5> <strong style={{fontWeight: "bold", fontSize: '16px'}}>Comment: </strong> {review.comment} </Card.Body>
+                                        </Accordion.Collapse>
+                                ))}
+                                
+                            </Card>
+                        </Accordion>
+                        <div style={{marginTop: '50px'}}></div>
+                        <Card>
                         <ListGroup variant='flush'>
-                            <ListGroup.Item >
-                                <h3>Write a Movie Review</h3>
-                            </ListGroup.Item >
+                            <Card.Header className='my-2'>
+                                <h4>Write a Movie Review</h4>
+                            </Card.Header>
 
                             {reviewSuccess && (
                                 <Message variant='success'>
@@ -212,6 +246,7 @@ const MovieDetails = ({ history, match }) => {
                             ) : <Message>Please <Link to='/login'>Sign In</Link> to write a review</Message> }
                             
                         </ListGroup>
+                        </Card>
                         
                     </Col>
                 </Row> 

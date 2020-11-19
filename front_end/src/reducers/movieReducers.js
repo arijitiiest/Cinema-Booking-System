@@ -4,7 +4,10 @@ import { MOVIE_LIST_REQUEST,
     MOVIE_DETAIL_FAIL, MOVIE_CREATE_REVIEW_REQUEST, 
     MOVIE_CREATE_REVIEW_SUCCESS, 
     MOVIE_CREATE_REVIEW_FAIL, 
-    MOVIE_CREATE_REVIEW_RESET
+    MOVIE_CREATE_REVIEW_RESET,
+    MOVIE_GET_REVIEW_REQUEST,
+    MOVIE_GET_REVIEW_SUCCESS,
+    MOVIE_GET_REVIEW_FAIL
 } from '../constants/movieConstants'
 
 export const movieListReducer = (state = { movies: [] }, action ) => {
@@ -43,6 +46,19 @@ export const movieCreateReviewReducer = (state = { }, action ) => {
             return { loading: false, error: action.payload }
         case MOVIE_CREATE_REVIEW_RESET:
             return { }
+        default:
+            return state
+    }
+}
+
+export const moviegetReviewReducer = (state = { reviews: [] }, action ) => {
+    switch (action.type) {
+        case MOVIE_GET_REVIEW_REQUEST:
+            return { loading: true }
+        case MOVIE_GET_REVIEW_SUCCESS:
+            return { loading: false, reviews: action.payload }
+        case MOVIE_GET_REVIEW_FAIL:
+            return { loading: false, error: action.payload }
         default:
             return state
     }
