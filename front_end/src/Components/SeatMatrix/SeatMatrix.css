@@ -35,3 +35,10 @@
 .seat:hover{
     transform: scale(1.1);
 }
+
+.seat-gray{
+  background-color: #ddd;
+}
+.seat-black{
+  background-color: rgb(0, 140, 255);
+}
