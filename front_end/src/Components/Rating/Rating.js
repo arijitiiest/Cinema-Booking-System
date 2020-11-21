@@ -55,7 +55,7 @@ const Rating = ({ id, reducer_id }) => {
                             rating_avg >= 1
                             ? 'fas fa-star'
                             : rating_avg >= 0.5
-                            ? 'fas fa-start-half-alt'
+                            ? 'fas fa-star-half-alt'
                             : 'far fa-star'
                         }></i>
                     </span>

@@ -46,6 +46,7 @@ const SeatArrangement = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [noOfSeats, setNoOfSeats] = React.useState(2);
+  // eslint-disable-next-line
   const [movieDetails, setMovieDetails] = React.useState({
     title: "Joker",
     format: "3D",

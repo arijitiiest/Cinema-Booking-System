@@ -55,7 +55,11 @@ const MovieDetails = ({ history, match }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch( createProductReview( id, rating, comment ) )
+        if(rating === 0){
+            alert('Provide a rating')
+        }else{
+            dispatch( createProductReview( id, rating, comment ) )
+        }
     }
 
     if (loading) {
