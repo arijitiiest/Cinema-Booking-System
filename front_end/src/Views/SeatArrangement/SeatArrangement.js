@@ -14,9 +14,12 @@ import {
 } from "@material-ui/core";
 import { Theaters } from "@material-ui/icons";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import SeatMatrix from "../../Components/SeatMatrix/SeatMatrix";
 import { screen } from "../../assets";
+import { useDispatch, useSelector } from "react-redux";
+import { setNoOfSeats } from "../../actions/seatActions";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -43,10 +46,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SeatArrangement = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const seats = useSelector((state) => state.seatBooking.Seats);
+  const noOfSeats = useSelector((state) => state.seatBooking.noOfSeat);
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [noOfSeats, setNoOfSeats] = React.useState(2);
-  // eslint-disable-next-line
+
   const [movieDetails, setMovieDetails] = React.useState({
     title: "Joker",
     format: "3D",
@@ -70,10 +78,9 @@ const SeatArrangement = () => {
     setOpen(true);
   };
 
-  const handleSelectSeatsDialog = React.useCallback((val) => {
-    console.log(val);
-    setNoOfSeats(val);
-  }, []);
+  const handleSelectSeatsDialog = (val) => {
+    dispatch(setNoOfSeats(val));
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -135,6 +142,34 @@ const SeatArrangement = () => {
       </div>
 
       <SeatMatrix data={seatMatrixData} />
+
+      {seats.length === noOfSeats ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "5rem",
+          }}
+        >
+          <div style={{ width: "250px" }}>
+            <Button
+              color="primary"
+              variant="contained"
+              size="large"
+              fullWidth={true}
+              onClick={() => {history.push("/payment")}}
+            >
+              Pay{" "}
+              {`${seats.reduce(
+                (accumulator, seat) =>
+                  (accumulator.price || accumulator) + seat.price
+              )}`}
+            </Button>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
 
       <Dialog
         open={open}
