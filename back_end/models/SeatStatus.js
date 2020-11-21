@@ -13,6 +13,8 @@ const SeatStatus = sequelize.define("seatstatus", {
   date: Sequelize.DATEONLY,
   showtime: Sequelize.STRING(10),
   status: Sequelize.STRING(10),
+  user_id: Sequelize.INTEGER,
+  movie_id: Sequelize.INTEGER
 });
 
 module.exports = SeatStatus;

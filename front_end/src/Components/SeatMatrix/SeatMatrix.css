@@ -10,7 +10,7 @@
     font-family: monospace;
     font-size: large;
     font-weight: bold;
-    padding-top: 7px;
+    padding-top: 10px;
     padding-right: 1rem;
 }
 
@@ -20,25 +20,40 @@
 }
 
 .column {
-    padding: 5px;
+    padding: 3px;
 }
 
 .seat {
-  width: 20px;
-  height: 20px;
-  border: 1px solid gray;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgb(155, 155, 155);
   border-radius: 50% 50% 0px 0px;
   margin: 3px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4px;
+  font-family: monospace;
+  font-size: x-small;
+  font-weight: bold;
 }
 
 .seat:hover{
     transform: scale(1.1);
 }
 
-.seat-gray{
-  background-color: #ddd;
+.seat-blank{
+  background-color: #fff;
+  color: rgb(58, 58, 58);
 }
 .seat-black{
-  background-color: rgb(0, 140, 255);
+  background-color: rgb(0, 47, 255);
+  color: #fff;
+}
+.seat-undefined{
+  cursor: auto;
+  pointer-events: none;
+  background-color: rgb(139, 139, 139);
+  color: #fff;
 }

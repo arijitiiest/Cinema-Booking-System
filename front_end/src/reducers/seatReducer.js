@@ -1,8 +1,9 @@
-import { ADD_SEAT, NO_OF_SEAT, REMOVE_SEAT } from "../constants/seatConstants";
+import { ADD_SEAT, NO_OF_SEAT, REMOVE_SEAT, SET_BOOKING_DETAILS } from "../constants/seatConstants";
 
 const intitalState = {
   Seats: [],
   noOfSeat: 2,
+  booking: {}
 };
 
 export const seatBookingReducer = (state = intitalState, action) => {
@@ -20,6 +21,11 @@ export const seatBookingReducer = (state = intitalState, action) => {
         ...state,
         noOfSeat: action.payload,
       };
+    case SET_BOOKING_DETAILS:
+      return {
+        ...state,
+        booking: action.payload
+      }
     default:
       return state;
   }

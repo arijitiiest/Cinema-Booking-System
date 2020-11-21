@@ -9,8 +9,12 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
+import { Link } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -65,8 +69,35 @@ function getStepContent(step) {
 export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const token = useSelector((state) => state.userLogin.userInfo.token);
+  const booking = useSelector((state) => state.seatBooking);
 
-  const handleNext = () => {
+  const myData = {
+    date: booking.booking.date,
+    showtime: booking.booking.showtime,
+    status: "booked",
+    movie_id: booking.booking.movie.id,
+  };
+
+  const handleNext = async () => {
+    if (activeStep === 1) {
+      for (let seat in booking.Seats) {
+        let data = {
+          seat_id: booking.Seats[seat].id,
+          ...myData,
+        };
+        await axios({
+          method: "POST",
+          url: "/api/seatstatus",
+          data: data,
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+          },
+        }).then((res) => console.log(res.data));
+        setTimeout(() => {}, 4000 * (seat + 1));
+      }
+    }
     setActiveStep(activeStep + 1);
   };
 
@@ -80,7 +111,7 @@ export default function Checkout() {
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Company name
+            <a href="/">CHOLOCHITRO BHOBON</a>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -104,8 +135,8 @@ export default function Checkout() {
                 </Typography>
                 <Typography variant="subtitle1">
                   Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
+                  confirmation, and will send you an update in your whatsapp no
+                  also. Check your tickets in Profile section
                 </Typography>
               </React.Fragment>
             ) : (
@@ -123,7 +154,7 @@ export default function Checkout() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
+                    {activeStep === steps.length - 1 ? "Place Booking" : "Next"}
                   </Button>
                 </div>
               </React.Fragment>
