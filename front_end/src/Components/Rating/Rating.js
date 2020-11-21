@@ -40,7 +40,6 @@ const Rating = ({ id, reducer_id }) => {
         if(count === 0){
             return(
                 <div className='rating'>
-                    <h1> {avg_rating} </h1>
                     <span>Yet to be rated</span>
                 </div>
             )

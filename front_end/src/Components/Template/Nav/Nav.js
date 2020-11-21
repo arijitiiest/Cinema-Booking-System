@@ -1,8 +1,10 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navbar, Nav as Navb, Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { logout } from '../../../actions/userActions'
+import SearchBox from '../../SearchBox/SearchBox'
 
 const Nav = () => {
 
@@ -16,13 +18,14 @@ const Nav = () => {
     return (
         <div>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect style={{padding: '1.0rem'}}  >
-              <LinkContainer to='/'>
-                <Navbar.Brand> <div>Cholochitro Bhobon</div></Navbar.Brand>
-              </LinkContainer> 
-
+    
               <Container>
+                <LinkContainer to='/'>
+                  <Navbar.Brand> <div>Cholochitro Bhobon</div></Navbar.Brand>
+                </LinkContainer> 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
+                  <Route render={({ history }) => <SearchBox history={history}/> }/>
                   <Navb className="ml-auto">
                     <LinkContainer to='/shows'>
                       <Navb.Link> <i className="fas fa-film"></i> Shows</Navb.Link>

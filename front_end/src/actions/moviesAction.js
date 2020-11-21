@@ -14,11 +14,11 @@ import { MOVIE_LIST_REQUEST,
 import axios from 'axios'
 
 
-export const listMovies = () => async (dispatch) => {
+export const listMovies = ( keyword = '' ) => async (dispatch) => {
     try {
         dispatch({ type: MOVIE_LIST_REQUEST })
 
-        const { data } = await axios.get('/api/movies')
+        const { data } = await axios.get(`/api/movies?keyword=${keyword}`)
 
         dispatch({
             type: MOVIE_LIST_SUCCESS,

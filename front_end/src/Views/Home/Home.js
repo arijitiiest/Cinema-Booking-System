@@ -13,13 +13,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import "./Home.css";
 
 
-const Home = () => {
+const Home = ({ match }) => {
+
+    const keyword = match.params.keyword
 
     const dispatch = useDispatch()
     
     useEffect(() => {
-        dispatch(listMovies())
-    }, [dispatch])  
+        dispatch(listMovies(keyword))
+    }, [dispatch, keyword])  
     
     const movieList = useSelector(state => state.movieList)
     const { loading, movies, error } = movieList

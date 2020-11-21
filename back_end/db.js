@@ -1,4 +1,9 @@
 const { Sequelize } = require("sequelize");
+const Op = Sequelize.Op;
+const operatorsAliases = {
+  $like: Op.like,
+  $not: Op.not
+}
 
 require("dotenv").config({path: "./.env"});
 
@@ -9,6 +14,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "postgres",
+    operatorsAliases
   }
 );
 

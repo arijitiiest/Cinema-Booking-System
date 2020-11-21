@@ -24,6 +24,7 @@ function App() {
         <Switch>
           <Route exact path="/admin" component={AdminView} />
           <Provider store={store}>
+            <Route exact path="/search/:keyword" component={Home} />
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />

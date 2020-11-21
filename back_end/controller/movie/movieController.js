@@ -2,6 +2,9 @@ const sequelize = require("../../db");
 const Movies = require("../../models/movies");
 const Reviews = require("../../models/reviews");
 const Shows = require("../../models/shows");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 
 exports.getMovie = (req, res, next) => {
   const movie_id = req.params.id;
@@ -16,12 +19,15 @@ exports.getMovie = (req, res, next) => {
 };
 
 exports.getMovies = (req, res, next) => {
-  Movies.findAll()
+  const keyword = req.query.keyword ? '%'+req.query.keyword+'%' : '%'; 
+  Movies.findAll({
+    where: { title: { [Op.like]: keyword } }
+  })
     .then((movies) => {
       res.status(200).json(movies);
     })
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(401).json({ status: 401, message: "Somethong went wrong" });
     });
 };
