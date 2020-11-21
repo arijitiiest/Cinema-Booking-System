@@ -9,7 +9,7 @@ const Movie = ({ movie, reducer_id }) => {
 
     return(
         <>
-            <Card className='my-3 p-3 rounded' bg='info'>
+            <Card className='my-3 p-3 rounded'>
                 <Link to={`/movie/${movie.id}`}>
                     <Card.Img src={`/media/${movie.image_url}`} variant='top'/>
                 </Link>

@@ -10,22 +10,22 @@ const ShowbyMovie = ({ history, show }) => {
 
     return (
         <>
-            <Card className='my-3 p-3 rounded' >
+            <Card className='my-3 p-3 rounded'>
 
                 <Card.Body>    
                     <Card.Text as='div'>
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
-                                <h5> SHOWTIME : { show.showtime }, on { show.date } </h5>
+                                <h5> SHOWTIME: { show.showtime }, on { show.date } </h5>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <h5> LANGUAGE : { show.language } </h5>
+                                <h5> LANGUAGE: { show.language } </h5>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <h5> CINEMA SCREEN : { show.screen } in {show.movie.format} format </h5>
+                                <h5> CINEMA SCREEN: { show.screen } in {show.movie.format} format </h5>
                             </ListGroup.Item>
                         </ListGroup>
-                        <Link to={`/login?redirect=seatarrangement`} className='btn btn-dark my-3'>
+                        <Link to={`/login?redirect=seatarrangement`} className='btn btn-dark my-2'>
                             Book Ticket
                         </Link>
                     </Card.Text>

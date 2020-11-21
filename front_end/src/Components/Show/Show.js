@@ -18,7 +18,7 @@ const Show = ({ show }) => {
                     <Card.Img src={`/media/show/${show.movie.image_url}`} variant='top' />
                 </Link>
             
-                <Card.Body>
+                <Card.Body >
                     
                     <Card.Text as='div'>
                         <ListGroup variant='flush'>

@@ -164,24 +164,7 @@ const MovieDetails = ({ history, match }) => {
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card>
-                        <div style={{marginTop: '50px'}}></div>
-                        <Accordion defaultActiveKey="0">
-                            <Card>
-                                <Card.Header>
-                                    <Accordion.Toggle as={Button} variant="link" eventKey="1" className='my-1 py-1'>
-                                        <h4>Click to view the Reviews</h4>
-                                    </Accordion.Toggle>
-                                </Card.Header>
-                                
-
-                                {reviews && reviews.map((review, key) => (
-                                        <Accordion.Collapse eventKey="1">
-                                            <Card.Body> <h5>{review.rating} start</h5> <strong style={{fontWeight: "bold", fontSize: '16px'}}>Comment: </strong> {review.comment} </Card.Body>
-                                        </Accordion.Collapse>
-                                ))}
-                                
-                            </Card>
-                        </Accordion>
+                        
                         <div style={{marginTop: '50px'}}></div>
                         <Card>
                         <ListGroup variant='flush'>
@@ -251,6 +234,24 @@ const MovieDetails = ({ history, match }) => {
                             
                         </ListGroup>
                         </Card>
+                        <div style={{marginTop: '50px'}}></div>
+                        <Accordion defaultActiveKey="0">
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="1" className='my-1 py-1'>
+                                        <h4>Click to view the Reviews</h4>
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                
+
+                                {reviews && reviews.map((review, key) => (
+                                        <Accordion.Collapse eventKey="1">
+                                            <Card.Body> <h5>{review.rating} start</h5> <strong style={{fontWeight: "bold", fontSize: '16px'}}>Comment: </strong> {review.comment} </Card.Body>
+                                        </Accordion.Collapse>
+                                ))}
+                                
+                            </Card>
+                        </Accordion>
                         
                     </Col>
                 </Row> 
