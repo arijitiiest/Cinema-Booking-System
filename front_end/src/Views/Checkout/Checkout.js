@@ -81,13 +81,14 @@ export default function Checkout() {
   };
 
   const handleNext = async () => {
+    let res = [];
     if (activeStep === 1) {
       for (let seat in booking.Seats) {
         let data = {
           seat_id: booking.Seats[seat].id,
           ...myData,
         };
-        await axios({
+        res[seat] = await axios({
           method: "POST",
           url: "/api/seatstatus",
           data: data,
@@ -95,9 +96,9 @@ export default function Checkout() {
             "Content-Type": "application/json",
             authorization: token,
           },
-        }).then((res) => console.log(res.data));
-        setTimeout(() => {}, 4000 * (seat + 1));
+        });
       }
+      // console.log(res);
     }
     setActiveStep(activeStep + 1);
   };
@@ -135,7 +136,7 @@ export default function Checkout() {
                 <Typography variant="h5" gutterBottom>
                   Thank you for your order.
                 </Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="subtitle1" style={{ fontSize: "12px" }}>
                   Your order number is #2001539. We have emailed your order
                   confirmation, and will send you an update in your whatsapp no
                   also. Check your tickets in Profile section
@@ -146,6 +147,7 @@ export default function Checkout() {
                   onClick={() => {
                     history.push("/tickets");
                   }}
+                  style={{ margin: "1rem 12rem" }}
                 >
                   View Tickets
                 </Button>

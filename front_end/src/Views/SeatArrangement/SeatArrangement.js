@@ -104,7 +104,7 @@ const SeatArrangement = (props) => {
   return (
     <>
       {!props.location.aboutProps ? <Redirect to="/" /> : null}
-      <div>
+      <div style={{height: "900px"}}>
         <AppBar position="static" className={classes.appbar}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>

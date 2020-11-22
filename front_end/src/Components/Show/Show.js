@@ -33,7 +33,7 @@ const Show = ({ show }) => {
                             </ListGroup.Item>
                         </ListGroup>
                     </Card.Text>
-                    <Link to='/login?redirect=seatarrangement'>
+                    <Link to={{ pathname: "/seatarrangement", aboutProps: { show } }}>
                         <Button className='btn btn-dark my-3' onClick={onClickHandler} >Book Ticket</Button>
                     </Link>
                 </Card.Body>
