@@ -6,6 +6,7 @@ import Message from "../../Components/Message/Message";
 import Loader from "../../Components/Loader/Loader";
 import { login } from "../../actions/userActions";
 import Navbar from "../../Components/Template/Nav/Nav";
+import Footer from '../../Components/Template/Footer/Footer'
 import FormContainer from "../../Components/FormContainer/FormContainer";
 
 import "./Login.css";
@@ -36,6 +37,8 @@ const Login = ({ location, history }) => {
   return (
     <>
       <Navbar />
+      <br></br>
+      <br></br>
       <FormContainer>
         <h1 className="py-3">Sign In</h1>
         {error && <Message variant="danger"> {error} </Message>}
@@ -76,6 +79,23 @@ const Login = ({ location, history }) => {
           </Col>
         </Row>
       </FormContainer>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Footer/>
     </>
   );
 };

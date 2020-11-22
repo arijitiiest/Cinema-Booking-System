@@ -96,14 +96,14 @@ const Home = ({ match }) => {
             <Carousel.Item interval={2000}>
               <div
                 style={{
-                  backgroundImage: "url('/media/show/bishorjon.jpg'",
+                  backgroundImage: "url('/media/show/uma.jpg'",
                 }}
               >
                 <div style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
                   <Container>
                     <img
                       className="d-block w-100"
-                      src="/media/show/bishorjon.jpg"
+                      src="/media/show/uma.jpg"
                       alt=""
                       height="500px"
                     />

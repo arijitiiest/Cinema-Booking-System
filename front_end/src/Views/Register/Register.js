@@ -6,6 +6,7 @@ import Message from '../../Components/Message/Message'
 import Loader from '../../Components/Loader/Loader'
 import { register } from '../../actions/userActions'
 import Navbar from '../../Components/Template/Nav/Nav'
+import Footer from '../../Components/Template/Footer/Footer'
 import FormContainer from '../../Components/FormContainer/FormContainer'
 
 import "./Register.css";
@@ -40,6 +41,9 @@ const Register = ({ location }) => {
         <>  
             <Navbar/>
             <FormContainer>
+                <br></br>
+                <br></br>
+                
                 <h1 className='py-3'>Register</h1>
                 {userInfo && <Message variant='danger'> {userInfo.message} </Message>}
                 {message && <Message variant='danger'> {message} </Message>}
@@ -97,7 +101,6 @@ const Register = ({ location }) => {
                         onChange= {(e)=> setConfirmPassword(e.target.value)}
                         ></Form.Control>
                     </Form.Group>
-
                     <Button type='submit' variant='primary'>Register</Button>
                 </Form>
 
@@ -111,6 +114,15 @@ const Register = ({ location }) => {
                 </Row>
 
             </FormContainer>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <Footer/>
         </> 
     )
 }

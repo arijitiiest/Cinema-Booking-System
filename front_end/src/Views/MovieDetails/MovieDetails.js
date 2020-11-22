@@ -255,6 +255,7 @@ const MovieDetails = ({ history, match }) => {
                         
                     </Col>
                 </Row> 
+                <Footer/>
             </>
         )
     }

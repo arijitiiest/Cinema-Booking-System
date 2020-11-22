@@ -1,5 +1,5 @@
 import React,{ useEffect } from "react";
-import { Container, Image, ListGroup } from 'react-bootstrap';
+import { Container, ListGroup } from 'react-bootstrap';
 import Footer from "../../Components/Template/Footer/Footer";
 import Navbar from "../../Components/Template/Nav/Nav";
 import ShowbyMovie from "../../Components/ShowbyMovie/ShowbyMovie";
