@@ -7,7 +7,7 @@ import "./SeatMatrix.css";
 const Seat = (props) => {
   const dispatch = useDispatch();
   const [seatStatus, setSeatStatus] = React.useState("seat-blank");
-  const movieId = useSelector(state => state.seatBooking.booking.movie.id)
+  const movieId = useSelector((state) => state.seatBooking.booking.movie.id);
 
   const seats = useSelector((state) => state.seatBooking.Seats);
   const noOfSeats = useSelector((state) => state.seatBooking.noOfSeat);
@@ -15,14 +15,14 @@ const Seat = (props) => {
   React.useEffect(() => {
     if (
       props.seat.seatstatuses.length > 0 &&
-      props.seat.seatstatuses[0].status === "booked"
-      && props.seat.seatstatuses[0].movie_id === movieId
+      props.seat.seatstatuses[0].status === "booked" &&
+      props.seat.seatstatuses[0].movie_id === movieId
     ) {
       setSeatStatus("seat-undefined");
     } else {
       setSeatStatus("seat-blank");
     }
-  }, [props.seat]);
+  }, [props.seat, movieId]);
 
   const seatClickHandler = () => {
     const seatColor = document.querySelector(`.seat-${props.seat.id}`)
@@ -45,7 +45,8 @@ const Seat = (props) => {
       onClick={seatClickHandler}
       className={`seat seat-${props.seat.id} ${seatStatus}`}
     >
-      {props.seat.row_no}{props.seat.col_no}
+      {props.seat.row_no}
+      {props.seat.col_no}
     </div>
   );
 };

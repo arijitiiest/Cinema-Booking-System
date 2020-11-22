@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
-import { Link } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -76,7 +76,7 @@ export default function Checkout() {
     date: booking.booking.date,
     showtime: booking.booking.showtime,
     status: "booked",
-    movie_id: booking.booking.movie.id,
+    movie_id: booking.booking.movie ? booking.booking.movie.id : 0,
   };
 
   const handleNext = async () => {
@@ -107,6 +107,7 @@ export default function Checkout() {
 
   return (
     <React.Fragment>
+      {!booking.booking.movie ? <Redirect to="/" /> : null}
       <CssBaseline />
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>

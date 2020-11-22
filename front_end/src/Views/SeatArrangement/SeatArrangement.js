@@ -76,7 +76,7 @@ const SeatArrangement = (props) => {
       });
       dispatch(setSeatBooking(props.location.aboutProps.show));
     }
-  }, [props.location.aboutProps]);
+  }, [props.location.aboutProps, dispatch]);
 
   React.useEffect(() => {
     if (movieDetails.title !== "LOL")
@@ -87,7 +87,7 @@ const SeatArrangement = (props) => {
         .then((res) => {
           setSeatMatrixData(res.data);
         });
-  }, [movieDetails]);
+  }, [movieDetails, props.location]);
 
   const handleClickOpen = () => {
     setOpen(true);

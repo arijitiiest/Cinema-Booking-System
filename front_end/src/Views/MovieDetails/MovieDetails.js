@@ -245,7 +245,7 @@ const MovieDetails = ({ history, match }) => {
                                 
 
                                 {reviews && reviews.map((review, key) => (
-                                        <Accordion.Collapse eventKey="1">
+                                        <Accordion.Collapse key={key} eventKey="1">
                                             <Card.Body> <h5>{review.rating} start</h5> <strong style={{fontWeight: "bold", fontSize: '16px'}}>Comment: </strong> {review.comment} </Card.Body>
                                         </Accordion.Collapse>
                                 ))}
