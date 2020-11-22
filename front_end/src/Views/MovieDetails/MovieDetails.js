@@ -93,8 +93,8 @@ const MovieDetails = ({ history, match }) => {
                     <Col md={3} className='givepadding'>
                         <Image src={`/media/${image_url}`} alt={title} fluid style={{ width: "100%", height: "700px"}} /> 
                     </Col>
-                    <Col id={id} md={3} className='givepadding'>
-                        <ListGroup variant='flush'>
+                    <Col id={id} md={3} className='givepadding' >
+                        <ListGroup variant='flush' >
                             <ListGroup.Item>
                                 <h2> {title} </h2>
                             </ListGroup.Item>
@@ -226,7 +226,7 @@ const MovieDetails = ({ history, match }) => {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            <Button onClick={submitHandler} type='button' disabled={reviewLoading} >Submit</Button>
+                                            <Button className='btn-block btn-dark' onClick={submitHandler} type='button' disabled={reviewLoading} >Submit</Button>
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </>

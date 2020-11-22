@@ -51,23 +51,31 @@ const ShowbyLang = ({ location }) => {
         else{
             const movie = shows[0].movie;
             return (
-                <div>
+                <div style={{
+                    backgroundImage: `url(/media/show/${movie.image_url}`,
+                  }}>
                     <Navbar />
                     <Link className='btn btn-dark my-3' to={`/movie/${movie_id}`} >Go Back</Link>
-                    <main className="py-3">
+                    <main className="py-3" >
                         <Container>
-                            <ListGroup variant='flush'>
-                                <ListGroup.Item>
+                            <ListGroup>
+                                <ListGroup.Item style={{background: 'rgb(240,240,240)'}}>
                                     <h1> {movie.title} </h1>
                                 </ListGroup.Item>
-                                <ListGroup.Item>
+                                <br></br>
+                                <br></br>
+                                {/* <ListGroup.Item>
                                     <Image src={`/media/show/${movie.image_url}`} alt={movie.title} fluid /> 
-                                </ListGroup.Item>
+                                </ListGroup.Item> */}
 
                                 {shows.map((show, key) => (
-                                    <ListGroup.Item key={key}>
+                                    <>
+                                    <>
                                         <ShowbyMovie key={show.id} show={show}  />
-                                    </ListGroup.Item>
+                                    </>
+                                    <br></br>
+                                    <br></br>
+                                    </>
                                 ))}
                             </ListGroup>
                         </Container>

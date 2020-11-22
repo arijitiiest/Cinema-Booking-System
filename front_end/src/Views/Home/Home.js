@@ -50,14 +50,14 @@ const Home = ({ match }) => {
             <Carousel.Item interval={2000}>
               <div
                 style={{
-                  backgroundImage: "url('/media/show/default.jpg'",
+                  backgroundImage: "url('/media/show/robibar.jpg'",
                 }}
               >
                 <div style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
                   <Container>
                     <img
                       className="d-block w-100"
-                      src="/media/show/default.jpg"
+                      src="/media/show/robibar.jpg"
                       alt=""
                       height="500px"
                     />
@@ -73,14 +73,14 @@ const Home = ({ match }) => {
             <Carousel.Item interval={2000}>
               <div
                 style={{
-                  backgroundImage: "url('/media/show/patherpanchali.jpg'",
+                  backgroundImage: "url('/media/show/chander.jpg'",
                 }}
               >
                 <div style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
                   <Container>
                     <img
                       className="d-block w-100"
-                      src="/media/show/patherpanchali.jpg"
+                      src="/media/show/chander.jpg"
                       alt=""
                       height="500px"
                     />
@@ -96,14 +96,14 @@ const Home = ({ match }) => {
             <Carousel.Item interval={2000}>
               <div
                 style={{
-                  backgroundImage: "url('/media/show/sonarkella.jpg'",
+                  backgroundImage: "url('/media/show/bishorjon.jpg'",
                 }}
               >
                 <div style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
                   <Container>
                     <img
                       className="d-block w-100"
-                      src="/media/show/sonarkella.jpg"
+                      src="/media/show/bishorjon.jpg"
                       alt=""
                       height="500px"
                     />
@@ -119,14 +119,14 @@ const Home = ({ match }) => {
             <Carousel.Item interval={2000}>
               <div
                 style={{
-                  backgroundImage: "url('/media/show/twodaughters.jpg'",
+                  backgroundImage: "url('/media/show/rosogolla.jpg'",
                 }}
               >
                 <div style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
                   <Container>
                     <img
                       className="d-block w-100"
-                      src="/media/show/twodaughters.jpg"
+                      src="/media/show/rosogolla.jpg"
                       alt=""
                       height="500px"
                     />
