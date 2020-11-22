@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -71,6 +71,7 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const token = useSelector((state) => state.userLogin.userInfo.token);
   const booking = useSelector((state) => state.seatBooking);
+  const history = useHistory();
 
   const myData = {
     date: booking.booking.date,
@@ -139,6 +140,15 @@ export default function Checkout() {
                   confirmation, and will send you an update in your whatsapp no
                   also. Check your tickets in Profile section
                 </Typography>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={() => {
+                    history.push("/tickets");
+                  }}
+                >
+                  View Tickets
+                </Button>
               </React.Fragment>
             ) : (
               <React.Fragment>
