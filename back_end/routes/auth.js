@@ -8,6 +8,8 @@ router.post("/login", authController.postLogin);
 
 router.post("/register", authController.postRegister);
 
+router.get("/profile", authController.getProfile);
+
 router.post("/admin-login", authController.postAdminLogin);
 
 router.post("/admin-register", authController.postAdminRegister);

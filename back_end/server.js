@@ -1,5 +1,5 @@
 const express = require("express");
-var cors = require('cors')
+var cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 
@@ -17,7 +17,7 @@ const SeatStatus = require("./models/SeatStatus");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors())
+app.use(cors());
 
 const authRoutes = require("./routes/auth");
 const apiRoutes = require("./routes/api");
@@ -39,6 +39,12 @@ Movies.hasMany(Shows);
 
 SeatStatus.belongsTo(Seats, { constraints: true, onDelete: "CASCADE" });
 Seats.hasMany(SeatStatus);
+
+SeatStatus.belongsTo(Movies, { foreignKey: "movie_id" });
+Movies.hasMany(SeatStatus, { foreignKey: "movie_id" });
+
+SeatStatus.belongsTo(User, { foreignKey: "user_id" });
+User.hasMany(SeatStatus, { foreignKey: "user_id" });
 
 sequelize
   // .sync({ force: true })

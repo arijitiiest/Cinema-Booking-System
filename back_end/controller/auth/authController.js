@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../../models/user");
 const Admin = require("../../models/admin");
+const SeatStatus = require("../../models/SeatStatus");
+const Movies = require("../../models/movies");
+const Seats = require("../../models/Seats");
 
 exports.postLogin = async (req, res, next) => {
   const email = req.body.email;
@@ -19,9 +22,15 @@ exports.postLogin = async (req, res, next) => {
 
     if (bcrypt.compareSync(password, user.dataValues.password)) {
       const token = jwt.sign(user.dataValues.id, process.env.SECRET_KEY);
-      res
-        .status(200)
-        .json({ status: 200, id: user.id, first_name: user.first_name, last_name: user.last_name, email: user.email, token: token, message: "Login successful" });
+      res.status(200).json({
+        status: 200,
+        id: user.id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        token: token,
+        message: "Login successful",
+      });
     } else {
       const err = new Error("Password incorrect");
       err.status = 401;
@@ -130,5 +139,23 @@ exports.postAdminRegister = async (req, res, next) => {
   } catch (err) {
     // console.log(err);
     res.status(err.status).json({ status: err.status, message: err.message });
+  }
+};
+
+exports.getProfile = async (req, res, next) => {
+  var decoded = jwt.verify(
+    req.headers["authorization"],
+    process.env.SECRET_KEY
+  );
+  try {
+    const user = await User.findByPk(decoded);
+    console.log(user);
+
+    const bookings = await SeatStatus.findAll({ where: { user_id: decoded }, include: [Movies, Seats] });
+
+    res.status(200).json({ user, bookings });
+    console.log(bookings);
+  } catch (err) {
+    console.log(err);
   }
 };
