@@ -11,7 +11,7 @@ import { listShowbyLang } from "../../actions/showsAction";
 
 const ShowbyLang = ({ location }) => {
     
-    const movie_id = location.search.split('=')[1][0]
+    const movie_id = location.search.split('=')[1].split('&')[0]
     const lang = location.search.split('=')[2]
     const dispatch = useDispatch()
     useEffect(() => {
