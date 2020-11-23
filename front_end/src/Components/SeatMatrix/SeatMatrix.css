@@ -58,15 +58,27 @@
   background-color: rgb(139, 139, 139);
 }
 
-.seat-4,
 .seat-9,
-.seat-14,
-.seat-19,
-.seat-24 {
+.seat-30,
+.seat-51,
+.seat-72,
+.seat-93,
+.seat-114,
+.seat-135,
+.seat-156,
+.seat-177,
+.seat-198,
+.seat-220,
+.seat-235,
+.seat-250,
+.seat-265,
+.seat-280,
+.seat-295,
+.seat-310 {
   margin-left: 2.5rem;
 }
 
-.row-D {
+.row-H {
   margin-top: 2.5rem;
 }
 

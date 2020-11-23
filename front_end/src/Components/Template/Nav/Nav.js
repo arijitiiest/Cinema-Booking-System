@@ -55,7 +55,7 @@ const Nav = () => {
                   <LinkContainer
                     className="btn"
                     style={{ backgroundColor: "white", color: "black" }}
-                    to="/"
+                    to="/profile"
                   >
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>

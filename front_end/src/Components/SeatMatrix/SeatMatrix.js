@@ -15,7 +15,7 @@ const Seat = (props) => {
 
   React.useEffect(() => {
     if (
-      ((props.seat.row_no.charCodeAt() - 65) * 5 + props.seat.col_no) % 2 ===
+      ((props.seat.row_no.charCodeAt() - 65) * 21 + props.seat.col_no) % 2 ===
       0
     ) {
       setSeatStatus("seat-covid");
@@ -92,7 +92,19 @@ const SeatMatrix = (props) => {
     <div className="seatMatrixContainer">
       {seatMatrixKeys.map((key) => (
         <div key={key} className="row">
-          <div className={`rowText row-${key}`}>{key}</div>
+          <div className={`rowText row-${key}`}>
+            {key}{" "}
+            <span
+              style={{
+                fontFamily: "monospace",
+                color: "blue",
+                fontSize: "11px",
+                fontWeight: "normal",
+              }}
+            >
+              ({`$${seatMatrix[key][0].price}`})
+            </span>
+          </div>
           {seatMatrix[key].map((seat) => (
             <div key={seat.id} className={`column row-${key}`}>
               <Seat seat={seat} />

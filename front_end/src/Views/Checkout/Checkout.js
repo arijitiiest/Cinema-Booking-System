@@ -145,7 +145,7 @@ export default function Checkout() {
                   color="primary"
                   variant="contained"
                   onClick={() => {
-                    history.push("/tickets");
+                    history.push("/profile");
                   }}
                   style={{ margin: "1rem 12rem" }}
                 >

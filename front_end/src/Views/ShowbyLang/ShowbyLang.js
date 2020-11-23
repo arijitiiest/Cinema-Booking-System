@@ -69,13 +69,13 @@ const ShowbyLang = ({ location }) => {
                                 </ListGroup.Item> */}
 
                                 {shows.map((show, key) => (
-                                    <>
+                                    <span key={show.id}>
                                     <>
                                         <ShowbyMovie key={show.id} show={show}  />
                                     </>
                                     <br></br>
                                     <br></br>
-                                    </>
+                                    </span>
                                 ))}
                             </ListGroup>
                         </Container>
