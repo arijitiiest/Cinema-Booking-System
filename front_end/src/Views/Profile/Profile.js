@@ -7,7 +7,7 @@ import Footer from "../../Components/Template/Footer/Footer";
 import Navbar from "../../Components/Template/Nav/Nav";
 import Message from "../../Components/Message/Message";
 
-import { Card, Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import Ticket from "../../Components/Ticket/Ticket";
 
 const Profile = (props) => {
@@ -84,7 +84,7 @@ const Profile = (props) => {
             <Col xs={8} id="page-content-wrapper">
               <Container style={{ width: "100%" }}>
                 <div style={{ fontSize: "24px" }}>Tickets:</div>
-                {bookings.length == 0 ? (
+                {bookings.length === 0 ? (
                   <div>No Bookings Yet</div>
                 ) : (
                   <div>
@@ -101,8 +101,6 @@ const Profile = (props) => {
       </div>
     );
   }
-
-  return <div></div>;
 };
 
 export default Profile;
