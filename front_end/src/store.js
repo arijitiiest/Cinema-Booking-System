@@ -15,6 +15,7 @@ import {
 } from "./reducers/showReducers";
 import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 import { seatBookingReducer } from "./reducers/seatReducer";
+import { ProfileReducer } from "./reducers/profileReducer";
 
 const reducer = combineReducers({
   movieList: movieListReducer,
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   movieCreateReview: movieCreateReviewReducer,
   moviegetReview: moviegetReviewReducer,
   seatBooking: seatBookingReducer,
+  profile: ProfileReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

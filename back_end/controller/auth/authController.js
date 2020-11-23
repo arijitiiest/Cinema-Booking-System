@@ -149,12 +149,10 @@ exports.getProfile = async (req, res, next) => {
   );
   try {
     const user = await User.findByPk(decoded);
-    console.log(user);
 
     const bookings = await SeatStatus.findAll({ where: { user_id: decoded }, include: [Movies, Seats] });
 
     res.status(200).json({ user, bookings });
-    console.log(bookings);
   } catch (err) {
     console.log(err);
   }
